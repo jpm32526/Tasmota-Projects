@@ -1,0 +1,421 @@
+[
+    {
+        "id": "d77fcbb9.20af08",
+        "type": "tab",
+        "label": "OWM Weather",
+        "disabled": false,
+        "info": "Displays local conditions as downloaded\nfrom Open Weather Maps for my lat/long."
+    },
+    {
+        "id": "730d7ba6.529354",
+        "type": "ui_button",
+        "z": "d77fcbb9.20af08",
+        "name": "IconRefresh",
+        "group": "a4ce3a61.f85d6",
+        "order": 1,
+        "width": 2,
+        "height": 2,
+        "passthru": false,
+        "label": "",
+        "tooltip": "Refresh",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa-refresh fa-4x",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "topicType": "str",
+        "x": 650,
+        "y": 580,
+        "wires": [
+            [
+                "98e85199.3f2a68"
+            ]
+        ]
+    },
+    {
+        "id": "bef057bb.7435",
+        "type": "ui_text",
+        "z": "d77fcbb9.20af08",
+        "group": "a4ce3a61.f85d6",
+        "order": 5,
+        "width": 5,
+        "height": 1,
+        "name": "Description",
+        "label": "",
+        "format": "{{msg.payload.current.weather[0].description}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 650,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f98a3590.db955",
+        "type": "ui_text",
+        "z": "d77fcbb9.20af08",
+        "group": "a4ce3a61.f85d6",
+        "order": 3,
+        "width": 3,
+        "height": 1,
+        "name": "Wind",
+        "label": "",
+        "format": "{{msg.payload.current.wind_speed}}&nbsp;&nbsp;<i class=\"wi wi-darksky-wind\"></i>&nbsp;&nbsp;{{msg.payload.current.wind_cardinal}}",
+        "layout": "col-center",
+        "x": 630,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "5d4e16f9.fcc458",
+        "type": "ui_text",
+        "z": "d77fcbb9.20af08",
+        "group": "a4ce3a61.f85d6",
+        "order": 4,
+        "width": 3,
+        "height": 1,
+        "name": "SunriseTime",
+        "label": "",
+        "format": "<i class=\"wi wi-owm-01d\"></i>&nbsp;<i class=\"fa fa-arrow-up\"></i>&nbsp;&nbsp;{{msg.payload.current.sunrise}}",
+        "layout": "row-center",
+        "x": 650,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "4a5a1898.8e3888",
+        "type": "ui_text",
+        "z": "d77fcbb9.20af08",
+        "group": "a4ce3a61.f85d6",
+        "order": 6,
+        "width": 3,
+        "height": 1,
+        "name": "SunsetTime",
+        "label": "",
+        "format": "<i class=\"wi wi-wu-sunny\"></i>&nbsp;<i class=\"fa fa-arrow-down\"></i>&nbsp;&nbsp;{{msg.payload.current.sunset}}",
+        "layout": "row-center",
+        "x": 650,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "697a2479.12bf2c",
+        "type": "comment",
+        "z": "d77fcbb9.20af08",
+        "name": "OpenWeatherMap One Call API for Weather and Forecast",
+        "info": "",
+        "x": 270,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "e77b1bcc.d5b27",
+        "type": "ui_template",
+        "z": "d77fcbb9.20af08",
+        "group": "a4ce3a61.f85d6",
+        "name": "Forecast2",
+        "order": 7,
+        "width": 10,
+        "height": 2,
+        "format": "<div style=\"height: 100%; justify-content: center; align-items: center;\">\n <div layout=\"rowicons\" layout-align=\"space-around start\" ng-repeat=\"data in msg.payload.rowicons\" style=\"font-size:150%;padding-top: 5px;padding-bottom: 5px\">\n  <span flex style=\"color: white;text-align: center\"><i class=\"wi wi-owm-{{data.cell01}}\"></i></span>\n  <span flex style=\"color: white;text-align: center\"><i class=\"wi wi-owm-{{data.cell02}}\"></i></span>\n  <span flex style=\"color: white;text-align: center\"><i class=\"wi wi-owm-{{data.cell03}}\"></i></span>\n  <span flex style=\"color: white;text-align: center\"><i class=\"wi wi-owm-{{data.cell04}}\"></i></span>\n  <span flex style=\"color: white;text-align: center\"><i class=\"wi wi-owm-{{data.cell05}}\"></i></span>\n  <span flex style=\"color: white;text-align: center\"><i class=\"wi wi-owm-{{data.cell06}}\"></i></span>\n  <span flex style=\"color: #097479;text-align: center\"><i class=\"wi wi-owm-{{data.cell07}}\"></i></span>\n  <span flex style=\"color: #097479;text-align: center\"><i class=\"wi wi-owm-{{data.cell08}}\"></i></span>\n  <span flex style=\"color: #097479;text-align: center\"><i class=\"wi wi-owm-{{data.cell09}}\"></i></span>\n  <span flex style=\"color: #097479;text-align: center\"><i class=\"wi wi-owm-{{data.cell10}}\"></i></span>\n </div>\n <div layout=\"rowtext\" layout-align=\"space-around start\" ng-repeat=\"data in msg.payload.rowtext\" style=\"line-height: 150%\">\n  <span flex style=\"color: white;text-align: center;\">{{data.cell01}}</span>\n  <span flex style=\"color: white;text-align: center\">{{data.cell02}}</span>\n  <span flex style=\"color: white;text-align: center\">{{data.cell03}}</span>\n  <span flex style=\"color: white;text-align: center\">{{data.cell04}}</span>\n  <span flex style=\"color: white;text-align: center\">{{data.cell05}}</span>\n  <span flex style=\"color: white;text-align: center\">{{data.cell06}}</span>\n  <span flex style=\"color: #097479;text-align: center\">{{data.cell07}}</span>\n  <span flex style=\"color: #097479;text-align: center\">{{data.cell08}}</span>\n  <span flex style=\"color: #097479;text-align: center\">{{data.cell09}}</span>\n  <span flex style=\"color: #097479;text-align: center\">{{data.cell10}}</span>\n </div>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 640,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3f28bd71.4eacf2",
+        "type": "function",
+        "z": "d77fcbb9.20af08",
+        "name": "Format forecast data",
+        "func": "var fcdata = {};\nvar units=flow.get('units');\nif (units===\"metric\")\n{\n  units=\"imperial\";\n}\n\nfunction formatTemp(high, low){\n  var temp;\n    if (units === \"imperial\") {\n        if (low){\n          temp = parseFloat(high).toFixed() + '/' + parseFloat(low).toFixed()\n        }\n        else {\n          temp = parseFloat(high).toFixed() + '°F'\n        }\n    }\n    else { // metric\n//        temp = parseFloat(temp).toFixed(1) + '°C'\n        if (low){\n          temp = parseFloat(high).toFixed() + '/' + parseFloat(low).toFixed()\n        }\n        else {\n          temp = parseFloat(high).toFixed() + '°C'\n        }\n    }\n    return temp;\n}\nfunction dayName(unixTime){\n    var d = new Date(unixTime * 1000);\n    var weekday = new Array(7);\n        weekday[0] = \"Sun\";\n        weekday[1] = \"Mon\";\n        weekday[2] = \"Tue\";\n        weekday[3] = \"Wed\";\n        weekday[4] = \"Thu\";\n        weekday[5] = \"Fri\";\n        weekday[6] = \"Sat\";\n\n    return weekday[d.getDay()]\n}\nfunction timeConvert(UNIX_timestamp){\n  var a = new Date(UNIX_timestamp * 1000);\n  var hour = a.getHours();\n  var suffix = \" am\";\n  if (hour >= 12) {\n    hour = hour - 12;\n    suffix = \" pm\";\n  }\n  if (hour === 0) {\n    hour = 12;\n  }\n  var min = a.getMinutes();\n  if (min < 10) {min = \"0\" + min;}\n//  return hour + ':' + min + suffix;\n  return hour + suffix;\n}\n// prepare forecast data for CSS based ui widget\n\nfcdata.payload = {\n  rowtext: {\n  \tdata01: {\n      cell01: timeConvert(msg.payload.hourly[1].dt),\n      cell02: timeConvert(msg.payload.hourly[2].dt),\n      cell03: timeConvert(msg.payload.hourly[3].dt),\n      cell04: timeConvert(msg.payload.hourly[4].dt),\n      cell05: timeConvert(msg.payload.hourly[5].dt),\n      cell06: timeConvert(msg.payload.hourly[6].dt),\n      cell07: dayName(msg.payload.daily[1].dt),\n      cell08: dayName(msg.payload.daily[2].dt),\n      cell09: dayName(msg.payload.daily[3].dt),\n      cell10: dayName(msg.payload.daily[4].dt),\n  \t},\n  \tdata02: {\n       cell01: formatTemp(msg.payload.hourly[1].temp),\n       cell02: formatTemp(msg.payload.hourly[2].temp),\n       cell03: formatTemp(msg.payload.hourly[3].temp),\n       cell04: formatTemp(msg.payload.hourly[4].temp),\n       cell05: formatTemp(msg.payload.hourly[5].temp),\n       cell06: formatTemp(msg.payload.hourly[6].temp),\n       cell07: formatTemp(msg.payload.daily[1].temp.max, msg.payload.daily[0].temp.min),\n       cell08: formatTemp(msg.payload.daily[2].temp.max, msg.payload.daily[1].temp.min),\n       cell09: formatTemp(msg.payload.daily[3].temp.max, msg.payload.daily[2].temp.min),\n       cell10: formatTemp(msg.payload.daily[4].temp.max, msg.payload.daily[3].temp.min),\n  \t}\n  },\n  rowicons: {\n  \tdata01: {\n  \t\tcell01: msg.payload.hourly[1].weather[0].icon,\n  \t\tcell02: msg.payload.hourly[2].weather[0].icon,\n  \t\tcell03: msg.payload.hourly[3].weather[0].icon,\n  \t\tcell04: msg.payload.hourly[4].weather[0].icon,\n  \t\tcell05: msg.payload.hourly[5].weather[0].icon,\n  \t\tcell06: msg.payload.hourly[6].weather[0].icon,\n  \t\tcell07: msg.payload.daily[1].weather[0].icon,\n  \t\tcell08: msg.payload.daily[2].weather[0].icon,\n  \t\tcell09: msg.payload.daily[3].weather[0].icon,\n  \t\tcell10: msg.payload.daily[4].weather[0].icon,\n  \t}\n  }\n}\n\nreturn fcdata;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 300,
+        "wires": [
+            [
+                "e77b1bcc.d5b27"
+            ]
+        ]
+    },
+    {
+        "id": "ef4bab3f.5a29",
+        "type": "ui_text",
+        "z": "d77fcbb9.20af08",
+        "group": "a4ce3a61.f85d6",
+        "order": 2,
+        "width": 2,
+        "height": 1,
+        "name": "Temperature",
+        "label": "",
+        "format": "<p style=\"font-size: 200%\">{{msg.payload.current.temp}}</p>",
+        "layout": "row-left",
+        "className": "",
+        "x": 650,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "172ae35f.cd72e5",
+        "type": "http request",
+        "z": "d77fcbb9.20af08",
+        "name": "Get OWM data",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "query",
+        "url": "https://api.openweathermap.org/data/2.5/onecall",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 180,
+        "y": 320,
+        "wires": [
+            [
+                "61462bbb.13251c",
+                "3f28bd71.4eacf2"
+            ]
+        ]
+    },
+    {
+        "id": "c5c1a8ad.49e32",
+        "type": "inject",
+        "z": "d77fcbb9.20af08",
+        "name": "Trigger",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "900",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 100,
+        "y": 200,
+        "wires": [
+            [
+                "1561f47.915238c"
+            ]
+        ]
+    },
+    {
+        "id": "61462bbb.13251c",
+        "type": "function",
+        "z": "d77fcbb9.20af08",
+        "name": "Format current data",
+        "func": "var icon = {};\n\nvar units=flow.get('units');\nif (units===\"metric\")\n{\n  units=\"imperial\";\n}\n\nfunction timeConvert(UNIX_timestamp){\n  var a = new Date(UNIX_timestamp * 1000);\n  var hour = a.getHours();\n  var suffix = \" am\";\n  if (hour >= 12) {\n    hour = hour - 12;\n    suffix = \" pm\";\n  }\n  if (hour === 0) {\n    hour = 12;\n  }\n  var min = a.getMinutes();\n  if (min < 10) {min = \"0\" + min;}\n  return hour + ':' + min + suffix;\n}\n\nvar degreesToCardinal = function(deg)\n{\nif (deg>11.25 && deg<=33.75){\nreturn \"NNE\";\n  }else if (deg>33.75 && deg<56.25){\nreturn \"NE\";\n  }else if (deg>56.25 && deg<78.75){\nreturn \"ENE\";\n  }else if (deg>78.75 && deg<101.25){\nreturn \"E\";\n  }else if (deg>101.25 && deg<123.75){\nreturn \"ESE\";\n  }else if (deg>123.75 && deg<146.25){\nreturn \"SE\";\n  }else if (deg>146.25 && deg<168.75){\nreturn \"SSE\";\n  }else if (deg>168.75 && deg<191.25){\nreturn \"S\";\n  }else if (deg>191.25 && deg<213.75){\nreturn \"SSW\";\n  }else if (deg>213.75 && deg<236.25){\nreturn \"SW\";\n  }else if (deg>236.25 && deg<258.75){\nreturn \"WSW\";\n  }else if (deg>258.75 && deg<281.25){\nreturn \"W\";\n  }else if (deg>281.25 && deg<303.75){\nreturn \"WNW\";\n  }else if (deg>303.75 && deg<326.25){\nreturn \"NW\";\n  }else if (deg>326.25 && deg<348.75){\nreturn \"NNW\";\n  }else{\nreturn \"N\"; \n  }\n}\n\nif (units === \"imperial\")\n{\n  msg.payload.current.temp = msg.payload.current.temp.toFixed() + ' °F';\n  msg.payload.current.wind_speed = msg.payload.current.wind_speed.toFixed() + ' mph';\n}\nelse // metric units\n{\n  msg.payload.current.temp = msg.payload.current.temp.toFixed(1) + ' °C';\n  msg.payload.current.wind_speed = msg.payload.current.wind_speed.toFixed(1) + ' m/s';\n}\n\nmsg.payload.current.wind_cardinal = degreesToCardinal(msg.payload.current.wind_deg);\nmsg.payload.current.sunrise = timeConvert(msg.payload.current.sunrise);\nmsg.payload.current.sunset = timeConvert(msg.payload.current.sunset);\n\nvar iconString = 'wi-owm-' + msg.payload.current.weather[0].icon + ' wi-4x';\nicon = {\n    ui_control: {\n        icon: iconString\n    }\n}; \n\nreturn [msg, icon];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 420,
+        "wires": [
+            [
+                "ef4bab3f.5a29",
+                "f98a3590.db955",
+                "5d4e16f9.fcc458",
+                "4a5a1898.8e3888",
+                "bef057bb.7435",
+                "90fdd04e.2397b8"
+            ],
+            [
+                "730d7ba6.529354"
+            ]
+        ]
+    },
+    {
+        "id": "1561f47.915238c",
+        "type": "change",
+        "z": "d77fcbb9.20af08",
+        "name": "Set location, appid, units",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.lat",
+                "pt": "msg",
+                "to": "30.51",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.lon",
+                "pt": "msg",
+                "to": "-87.37",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.appid",
+                "pt": "msg",
+                "to": "c180070875e89cc78a0bd1079d7f00de",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.units",
+                "pt": "msg",
+                "to": "imperial",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "units",
+                "pt": "flow",
+                "to": "payload.units",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.exclude",
+                "pt": "msg",
+                "to": "minutely",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 200,
+        "wires": [
+            [
+                "172ae35f.cd72e5"
+            ]
+        ]
+    },
+    {
+        "id": "bdfd7f61.f1e1a",
+        "type": "ui_ui_control",
+        "z": "d77fcbb9.20af08",
+        "name": "Update tab",
+        "events": "all",
+        "x": 90,
+        "y": 100,
+        "wires": [
+            [
+                "be69c55d.0170e8"
+            ]
+        ]
+    },
+    {
+        "id": "98e85199.3f2a68",
+        "type": "link out",
+        "z": "d77fcbb9.20af08",
+        "name": "Refresh",
+        "links": [
+            "cb75adb.994d35"
+        ],
+        "x": 775,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "cb75adb.994d35",
+        "type": "link in",
+        "z": "d77fcbb9.20af08",
+        "name": "",
+        "links": [
+            "98e85199.3f2a68"
+        ],
+        "x": 55,
+        "y": 260,
+        "wires": [
+            [
+                "1561f47.915238c"
+            ]
+        ]
+    },
+    {
+        "id": "be69c55d.0170e8",
+        "type": "switch",
+        "z": "d77fcbb9.20af08",
+        "name": "tab focus",
+        "property": "tab",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 100,
+        "y": 160,
+        "wires": [
+            [
+                "1561f47.915238c"
+            ]
+        ]
+    },
+    {
+        "id": "90fdd04e.2397b8",
+        "type": "debug",
+        "z": "d77fcbb9.20af08",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 650,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a4ce3a61.f85d6",
+        "type": "ui_group",
+        "name": "MainGroup",
+        "tab": "686e3885.bc74b8",
+        "order": 1,
+        "disp": false,
+        "width": 10,
+        "collapse": false
+    },
+    {
+        "id": "686e3885.bc74b8",
+        "type": "ui_tab",
+        "name": "Weather",
+        "icon": "fa-thermometer-half",
+        "order": 9,
+        "disabled": false,
+        "hidden": false
+    }
+]
