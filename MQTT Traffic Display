@@ -1,0 +1,346 @@
+[
+    {
+        "id": "5de4ccad.8095b4",
+        "type": "tab",
+        "label": "MQTT Traffic Monitor",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "4008ed5e.9ad5fc",
+        "type": "function",
+        "z": "5de4ccad.8095b4",
+        "name": "Display Messages",
+        "func": "var data=context.get('data') || {};\n\nvar payload=msg.payload;\npayload=payload.slice(0,250);//limit size\n//node.log(payload);\nvar d= new Date();\n\nvar now=d.getTime();\nvar s= new Date(now);\nvar mtime=s.getDate()+\"/\"+(s.getMonth()+1)+\"/\" +s.getFullYear()+ \"- \"+ s.getHours() +\":\"+s.getMinutes()+\":\"+s.getSeconds();\nif (data.msg===undefined)\n    {\n    data.msg=[];\n    data.time=[];\n    data.topic=[];\n    }\ndata.msg.push(payload);\ndata.time.push(mtime);\ndata[\"topic\"].push(msg.topic);\nif (data.msg.length>20)\n{\n    data.msg.shift();\n    data.time.shift();\n    data.topic.shift();\n}\n\n\n//node.log(\"data \" + data.msg.length);\n\ncontext.set('data',data);\nvar msg1={};\nmsg1[\"data\"]=data;\n\nreturn msg1;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 320,
+        "wires": [
+            [
+                "4e92939d.8b52fc"
+            ]
+        ]
+    },
+    {
+        "id": "4e92939d.8b52fc",
+        "type": "ui_template",
+        "z": "5de4ccad.8095b4",
+        "group": "4cb2f3b3.369134",
+        "name": "Display Messages Template",
+        "order": 0,
+        "width": "24",
+        "height": "24",
+        "format": "<style>\n.header\n{\n   background:red;\n   color:white;\n}\nbutton\n{\nbackground:red;\ncolor:white;\nwidth:60px;\n}\ntable\n{\n   border-collapse:separate; \n   border-spacing:0 10px;    \n}\ntd\n{\ntext_align:left;\npadding:5px;\nborder:0.5px dashed;\n}\nth\n{\ntext_align:left;\npadding:5px;\nborder:0.5px solid;\n}\n.display {\n  height: 400px;\n  width: 70%;\n  //background-color: powderblue;\n}\n</style>\n\n<div class=\"display\">\n\n    <table >\n\t <thead>\n        <tr>\n            <th class=\"head\" colspan=\"3\"><h3>Displaying Last Twenty Messages</h3></th>\n        </tr>\n <tr class=\"header\"><td>Time </td> <td width=\"250px\">Topic </td><td width=\"750px\"> Payload</td></tr>\n    </thead>\n    <tr>\n\t<td>{{msg.data.time[19]}}</td>\n<td>{{msg.data.topic[19]}}</td>\n        <td>{{msg.data.msg[19]}}</td>\n    </tr>\n\t    <tr>\n      <td>{{msg.data.time[18]}}</td>\n<td>{{msg.data.topic[18]}}</td>\n        <td>{{msg.data.msg[18]}}</td>\n    </tr>\n\t    <tr>\n<td>{{msg.data.time[17]}}</td>\n<td>{{msg.data.topic[17]}}</td>\n        <td>{{msg.data.msg[17]}}</td>\n    </tr>\n\t    <tr>\n<td>{{msg.data.time[16]}}</td>\n<td>{{msg.data.topic[16]}}</td>\n        <td>{{msg.data.msg[16]}}</td>\n    </tr>\n\t    <tr>\n<td>{{msg.data.time[15]}}</td>\n<td>{{msg.data.topic[15]}}</td>\n        <td>{{msg.data.msg[15]}}</td>\n    </tr>\n\t    <tr>\n<td>{{msg.data.time[14]}}</td>\n<td>{{msg.data.topic[14]}}</td>\n        <td>{{msg.data.msg[14]}}</td>\n    </tr>\n\t\t    <tr>\n<td>{{msg.data.time[13]}}</td>\n<td>{{msg.data.topic[13]}}</td>\n        <td>{{msg.data.msg[13]}}</td>\n    </tr>\n\t\t    <tr>\n<td>{{msg.data.time[12]}}</td>\n<td>{{msg.data.topic[12]}}</td>\n        <td>{{msg.data.msg[12]}}</td>\n    </tr>\n\t\t    <tr>\n<td>{{msg.data.time[11]}}</td>\n<td>{{msg.data.topic[11]}}</td>\n        <td>{{msg.data.msg[11]}}</td>\n    </tr>\n\t\t    <tr>\n<td>{{msg.data.time[10]}}</td>\n <td>{{msg.data.topic[10]}}</td>\n        <td>{{msg.data.msg[10]}}</td>\n    </tr>    <tr>\n\t<td>{{msg.data.time[9]}}</td>\n<td>{{msg.data.topic[9]}}</td>\n        <td>{{msg.data.msg[9]}}</td>\n    </tr>\n\t    <tr>\n      <td>{{msg.data.time[8]}}</td>\n<td>{{msg.data.topic[8]}}</td>\n        <td>{{msg.data.msg[8]}}</td>\n    </tr>\n\t    <tr>\n<td>{{msg.data.time[7]}}</td>\n<td>{{msg.data.topic[7]}}</td>\n        <td>{{msg.data.msg[7]}}</td>\n    </tr>\n\t    <tr>\n<td>{{msg.data.time[6]}}</td>\n<td>{{msg.data.topic[6]}}</td>\n        <td>{{msg.data.msg[6]}}</td>\n    </tr>\n\t    <tr>\n<td>{{msg.data.time[5]}}</td>\n<td>{{msg.data.topic[5]}}</td>\n        <td>{{msg.data.msg[5]}}</td>\n    </tr>\n\t    <tr>\n<td>{{msg.data.time[4]}}</td>\n<td>{{msg.data.topic[4]}}</td>\n        <td>{{msg.data.msg[4]}}</td>\n    </tr>\n\t\t    <tr>\n<td>{{msg.data.time[3]}}</td>\n<td>{{msg.data.topic[3]}}</td>\n        <td>{{msg.data.msg[3]}}</td>\n    </tr>\n\t\t    <tr>\n<td>{{msg.data.time[2]}}</td>\n<td>{{msg.data.topic[2]}}</td>\n        <td>{{msg.data.msg[2]}}</td>\n    </tr>\n\t\t    <tr>\n<td>{{msg.data.time[1]}}</td>\n<td>{{msg.data.topic[1]}}</td>\n        <td>{{msg.data.msg[1]}}</td>\n    </tr>\n\t\t    <tr>\n<td>{{msg.data.time[0]}}</td>\n <td>{{msg.data.topic[0]}}</td>\n        <td>{{msg.data.msg[0]}}</td>\n    </tr>\n</table>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 700,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "59ac0c5a.129abc",
+        "type": "mqtt in",
+        "z": "5de4ccad.8095b4",
+        "name": "",
+        "topic": "myapi/response/#",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "4008ed5e.9ad5fc"
+            ]
+        ]
+    },
+    {
+        "id": "6276c61e.2c505",
+        "type": "mqtt in",
+        "z": "5de4ccad.8095b4",
+        "name": "",
+        "topic": "#",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 90,
+        "y": 80,
+        "wires": [
+            [
+                "a166657e.58c0d"
+            ]
+        ]
+    },
+    {
+        "id": "9c73c3b1.183488",
+        "type": "mqtt in",
+        "z": "5de4ccad.8095b4",
+        "name": "",
+        "topic": "$SYS/broker/log/#",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "4008ed5e.9ad5fc"
+            ]
+        ]
+    },
+    {
+        "id": "9c934b4.3efaeb8",
+        "type": "mqtt in",
+        "z": "5de4ccad.8095b4",
+        "name": "Box1",
+        "topic": "stat//Box1/#",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 90,
+        "y": 260,
+        "wires": [
+            [
+                "4008ed5e.9ad5fc"
+            ]
+        ]
+    },
+    {
+        "id": "4be90f5d.1548e",
+        "type": "mqtt in",
+        "z": "5de4ccad.8095b4",
+        "name": "Box2",
+        "topic": "stat/Box2/#",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 90,
+        "y": 320,
+        "wires": [
+            [
+                "4008ed5e.9ad5fc"
+            ]
+        ]
+    },
+    {
+        "id": "bae3e12f.73b1b8",
+        "type": "mqtt in",
+        "z": "5de4ccad.8095b4",
+        "name": "Box3A",
+        "topic": "stat/Box3A/#",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 90,
+        "y": 380,
+        "wires": [
+            [
+                "4008ed5e.9ad5fc"
+            ]
+        ]
+    },
+    {
+        "id": "44847a6e.c44304",
+        "type": "mqtt in",
+        "z": "5de4ccad.8095b4",
+        "name": "Box3B",
+        "topic": "stat/Box3B/#",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 90,
+        "y": 440,
+        "wires": [
+            [
+                "4008ed5e.9ad5fc"
+            ]
+        ]
+    },
+    {
+        "id": "a166657e.58c0d",
+        "type": "debug",
+        "z": "5de4ccad.8095b4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "ca6f872c.7b63d",
+        "type": "mqtt in",
+        "z": "5de4ccad.8095b4",
+        "name": "",
+        "topic": "tele/sensors/pwr/ISHP/#",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "f16d5986.777958",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 140,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "34bda956.691566",
+        "type": "mqtt in",
+        "z": "5de4ccad.8095b4",
+        "name": "",
+        "topic": "tele/sensors/pwr/OSHP/#",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "f16d5986.777958",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 150,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "18d300cf21a7199c",
+        "type": "mqtt in",
+        "z": "5de4ccad.8095b4",
+        "name": "Box4",
+        "topic": "stat/Box4/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f16d5986.777958",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 500,
+        "wires": [
+            [
+                "4008ed5e.9ad5fc"
+            ]
+        ]
+    },
+    {
+        "id": "b1b3a9320bd11ea9",
+        "type": "mqtt in",
+        "z": "5de4ccad.8095b4",
+        "name": "Pool",
+        "topic": "stat/sensors/pwr/PoolPump/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 560,
+        "wires": [
+            [
+                "4008ed5e.9ad5fc"
+            ]
+        ]
+    },
+    {
+        "id": "4cb2f3b3.369134",
+        "type": "ui_group",
+        "name": "Messages",
+        "tab": "cdcba049.3b4c1",
+        "order": 1,
+        "disp": true,
+        "width": "24",
+        "collapse": false
+    },
+    {
+        "id": "7750bcb.fd7ad44",
+        "type": "mqtt-broker",
+        "name": "mqtt_pi",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "f16d5986.777958",
+        "type": "mqtt-broker",
+        "name": "emon",
+        "broker": "192.168.1.21",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "cdcba049.3b4c1",
+        "type": "ui_tab",
+        "name": "Monitor",
+        "icon": "dashboard",
+        "order": 11,
+        "disabled": false,
+        "hidden": false
+    }
+]
