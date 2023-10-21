@@ -1,0 +1,1104 @@
+[
+    {
+        "id": "90963706.bb3f3",
+        "type": "tab",
+        "label": "House Sensors",
+        "disabled": false,
+        "info": "General overview of the home sensors.\nDetailed views on other pages.\nSome are experimental or sample code from others."
+    },
+    {
+        "id": "bb8baf49.bb2c7",
+        "type": "inject",
+        "z": "90963706.bb3f3",
+        "name": "10sec_update",
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 60,
+        "wires": [
+            [
+                "b20b48b5.089418",
+                "22e63bd99df2980e"
+            ]
+        ]
+    },
+    {
+        "id": "1d256228.6c5cb6",
+        "type": "inject",
+        "z": "90963706.bb3f3",
+        "name": "1min_update",
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 580,
+        "wires": [
+            [
+                "2a81b260.15772e",
+                "78575894.649d7",
+                "6126b0f9.f275b",
+                "ace17fa6.0abcf",
+                "45139385.e18a44",
+                "87348ebc.32e898",
+                "913dfdc4.5a7ed",
+                "974299df.0309b8",
+                "56f57b23.46d414",
+                "730c813c.186278",
+                "bfadcdc4.454e78",
+                "d365a053.6d1988",
+                "1412422e.faa86e",
+                "c28b2fcb.5657d8"
+            ]
+        ]
+    },
+    {
+        "id": "78575894.649d7",
+        "type": "mqtt out",
+        "z": "90963706.bb3f3",
+        "name": "heartbeat",
+        "topic": "toesp/{heartbeat}",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f16d5986.777958",
+        "x": 400,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "b20b48b5.089418",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "Watts",
+        "emonServer": "a2df0269.797588",
+        "feedid": "1",
+        "x": 390,
+        "y": 60,
+        "wires": [
+            [
+                "b28b9e67.e251e",
+                "2d2e0a5e.51390e"
+            ]
+        ]
+    },
+    {
+        "id": "2a81b260.15772e",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "Pool_temp",
+        "emonServer": "a2df0269.797588",
+        "feedid": "13",
+        "x": 410,
+        "y": 280,
+        "wires": [
+            [
+                "478e43c1.77eddc",
+                "9ee7a9a1.dc6a28"
+            ]
+        ]
+    },
+    {
+        "id": "6126b0f9.f275b",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "KitchenTemp",
+        "emonServer": "a2df0269.797588",
+        "feedid": "3",
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "87e013d.ea6bcf"
+            ]
+        ]
+    },
+    {
+        "id": "ace17fa6.0abcf",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "Office",
+        "emonServer": "a2df0269.797588",
+        "feedid": "14",
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "781a6984.baae2"
+            ]
+        ]
+    },
+    {
+        "id": "45139385.e18a44",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "T-stat",
+        "emonServer": "a2df0269.797588",
+        "feedid": "25",
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "9d80d18a.3f0dc"
+            ]
+        ]
+    },
+    {
+        "id": "87348ebc.32e898",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "DR Table",
+        "emonServer": "a2df0269.797588",
+        "feedid": "26",
+        "x": 400,
+        "y": 480,
+        "wires": [
+            [
+                "cc646a8d.457a6"
+            ]
+        ]
+    },
+    {
+        "id": "913dfdc4.5a7ed",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "FloridaRoom",
+        "emonServer": "a2df0269.797588",
+        "feedid": "21",
+        "x": 410,
+        "y": 520,
+        "wires": [
+            [
+                "f25d155b.d57fe"
+            ]
+        ]
+    },
+    {
+        "id": "974299df.0309b8",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "Garage",
+        "emonServer": "a2df0269.797588",
+        "feedid": "16",
+        "x": 400,
+        "y": 560,
+        "wires": [
+            [
+                "27461ba3.5db5bc"
+            ]
+        ]
+    },
+    {
+        "id": "56f57b23.46d414",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "Bedside",
+        "emonServer": "a2df0269.797588",
+        "feedid": "28",
+        "x": 400,
+        "y": 440,
+        "wires": [
+            [
+                "e47cec88.b4044"
+            ]
+        ]
+    },
+    {
+        "id": "b28b9e67.e251e",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Power Now",
+        "group": "5600fc7c.c6b574",
+        "order": 1,
+        "width": 4,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Power",
+        "label": "watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "10000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 610,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "478e43c1.77eddc",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Pool_temp",
+        "group": "150853bc.b605bc",
+        "order": 1,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Pool",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": "50",
+        "max": "100",
+        "colors": [
+            "#1600b5",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 610,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e94de2e8.0c86b",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "AC Volts",
+        "group": "5600fc7c.c6b574",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "AC Volts",
+        "label": "VAC",
+        "format": "{{value}}",
+        "min": "225",
+        "max": "275",
+        "colors": [
+            "#e6e600",
+            "#00b500",
+            "#ca3838"
+        ],
+        "seg1": "240",
+        "seg2": "260",
+        "diff": false,
+        "className": "",
+        "x": 600,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "87e013d.ea6bcf",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Kitchen",
+        "group": "e4aa4c6.ed493b",
+        "order": 1,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Kitchen",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": "50",
+        "max": "100",
+        "colors": [
+            "#0a1772",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 600,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "781a6984.baae2",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Office",
+        "group": "e4aa4c6.ed493b",
+        "order": 2,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Office",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": "50",
+        "max": "100",
+        "colors": [
+            "#0a1772",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 590,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "9d80d18a.3f0dc",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "T-stat",
+        "group": "e4aa4c6.ed493b",
+        "order": 3,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "HVAC",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": "50",
+        "max": "100",
+        "colors": [
+            "#0a1772",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 590,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "cc646a8d.457a6",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "DR Table",
+        "group": "e4aa4c6.ed493b",
+        "order": 4,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "DR Table",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": "50",
+        "max": "100",
+        "colors": [
+            "#0a1772",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 600,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "f25d155b.d57fe",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Florida Room",
+        "group": "58edee5c.4f0f7",
+        "order": 1,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Florida Room",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": "50",
+        "max": "100",
+        "colors": [
+            "#0a1772",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 620,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "27461ba3.5db5bc",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Garage",
+        "group": "58edee5c.4f0f7",
+        "order": 2,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Garage",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": "50",
+        "max": "100",
+        "colors": [
+            "#0004b5",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 600,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "8908cba9.3b4148",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Outhouse",
+        "group": "58edee5c.4f0f7",
+        "order": 3,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Outhouse",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": "50",
+        "max": "100",
+        "colors": [
+            "#0a1772",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 600,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e47cec88.b4044",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Bedside",
+        "group": "e4aa4c6.ed493b",
+        "order": 5,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Bedside",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": "50",
+        "max": "100",
+        "colors": [
+            "#0a1772",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 600,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "2d2e0a5e.51390e",
+        "type": "ui_chart",
+        "z": "90963706.bb3f3",
+        "name": "Power",
+        "group": "5600fc7c.c6b574",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "label": "Watts",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH",
+        "interpolate": "linear",
+        "nodata": "Wait....",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "4",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 590,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9ee7a9a1.dc6a28",
+        "type": "ui_chart",
+        "z": "90963706.bb3f3",
+        "name": "Pool_temp",
+        "group": "150853bc.b605bc",
+        "order": 2,
+        "width": 3,
+        "height": 3,
+        "label": "Pool_temp",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "48",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 610,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "730c813c.186278",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "Patio Temp",
+        "emonServer": "a2df0269.797588",
+        "feedid": "31",
+        "x": 410,
+        "y": 800,
+        "wires": [
+            [
+                "84e2e13a.33bd28"
+            ]
+        ]
+    },
+    {
+        "id": "bfadcdc4.454e78",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "Patio RH",
+        "emonServer": "a2df0269.797588",
+        "feedid": "32",
+        "x": 400,
+        "y": 840,
+        "wires": [
+            [
+                "b18b8796.8b7568"
+            ]
+        ]
+    },
+    {
+        "id": "d365a053.6d1988",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "Patio BP",
+        "emonServer": "a2df0269.797588",
+        "feedid": "33",
+        "x": 400,
+        "y": 880,
+        "wires": [
+            [
+                "13607541.379683"
+            ]
+        ]
+    },
+    {
+        "id": "84e2e13a.33bd28",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Patio Temp",
+        "group": "150853bc.b605bc",
+        "order": 3,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Patio Temp",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 610,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "b18b8796.8b7568",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Patio RH",
+        "group": "150853bc.b605bc",
+        "order": 4,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Patio RH",
+        "label": "%",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#d7c529",
+            "#0ec213",
+            "#3847ca"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 600,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "13607541.379683",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Patio BP",
+        "group": "150853bc.b605bc",
+        "order": 7,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "BP",
+        "label": "inHg",
+        "format": "{{value}}",
+        "min": "28",
+        "max": "32",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 600,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "1412422e.faa86e",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "Heat Index",
+        "emonServer": "a2df0269.797588",
+        "feedid": "34",
+        "x": 410,
+        "y": 920,
+        "wires": [
+            [
+                "ff99d254.b057e8"
+            ]
+        ]
+    },
+    {
+        "id": "c28b2fcb.5657d8",
+        "type": "emoncms in",
+        "z": "90963706.bb3f3",
+        "name": "Dew Point",
+        "emonServer": "a2df0269.797588",
+        "feedid": "35",
+        "x": 410,
+        "y": 960,
+        "wires": [
+            [
+                "ac01af4e.ac696"
+            ]
+        ]
+    },
+    {
+        "id": "ff99d254.b057e8",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Heat Index",
+        "group": "150853bc.b605bc",
+        "order": 5,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Patio Heat Index",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#002db5",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 610,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "ac01af4e.ac696",
+        "type": "ui_gauge",
+        "z": "90963706.bb3f3",
+        "name": "Dew Point",
+        "group": "150853bc.b605bc",
+        "order": 6,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Patio Dew Point",
+        "label": "°F",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#b50600",
+            "#e6e600",
+            "#3853ca"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 610,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "addec63c.0ff908",
+        "type": "ui_text",
+        "z": "90963706.bb3f3",
+        "group": "5600fc7c.c6b574",
+        "order": 4,
+        "width": 3,
+        "height": 1,
+        "name": "Time",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 690,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "e137551d.7ec82",
+        "type": "link in",
+        "z": "90963706.bb3f3",
+        "name": "AC_Volts",
+        "links": [
+            "2f3696cf.1f09f2",
+            "14986c4c.45f7e4"
+        ],
+        "x": 435,
+        "y": 140,
+        "wires": [
+            [
+                "e94de2e8.0c86b"
+            ]
+        ]
+    },
+    {
+        "id": "f59c9320011a5b04",
+        "type": "moment",
+        "z": "90963706.bb3f3",
+        "name": "",
+        "topic": "",
+        "input": "",
+        "inputType": "msg",
+        "inTz": "America/Chicago",
+        "adjAmount": "0",
+        "adjType": "hours",
+        "adjDir": "subtract",
+        "format": "hh:mm:ss A",
+        "locale": "en-US",
+        "output": "",
+        "outputType": "msg",
+        "outTz": "America/Chicago",
+        "x": 420,
+        "y": 1020,
+        "wires": [
+            [
+                "addec63c.0ff908"
+            ]
+        ]
+    },
+    {
+        "id": "22e63bd99df2980e",
+        "type": "Tasmota Sensor",
+        "z": "90963706.bb3f3",
+        "broker": "1f697ae0.735f35",
+        "device": "sensors/oh/Fan",
+        "name": "OH_Fan",
+        "outputs": 1,
+        "uidisabler": false,
+        "fullTopic": "",
+        "cmndPrefix": "",
+        "statPrefix": "",
+        "telePrefix": "",
+        "qos": 1,
+        "retain": false,
+        "rules": [
+            "DS18B20.Temperature"
+        ],
+        "outputTopic": "Fan",
+        "x": 400,
+        "y": 180,
+        "wires": [
+            [
+                "8908cba9.3b4148"
+            ]
+        ]
+    },
+    {
+        "id": "197a8e7ef1ec1940",
+        "type": "inject",
+        "z": "90963706.bb3f3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 1020,
+        "wires": [
+            [
+                "f59c9320011a5b04"
+            ]
+        ]
+    },
+    {
+        "id": "b54f7470a43aaf5a",
+        "type": "mqtt in",
+        "z": "90963706.bb3f3",
+        "name": "",
+        "topic": "tele/sensors/oh/Fan/STATE",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f16d5986.777958",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1200,
+        "wires": [
+            [
+                "c3e2bec138afe8ad"
+            ]
+        ]
+    },
+    {
+        "id": "c3e2bec138afe8ad",
+        "type": "change",
+        "z": "90963706.bb3f3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 1200,
+        "wires": [
+            [
+                "c830c804b78143d5"
+            ]
+        ]
+    },
+    {
+        "id": "c830c804b78143d5",
+        "type": "ui_text",
+        "z": "90963706.bb3f3",
+        "group": "58edee5c.4f0f7",
+        "order": 5,
+        "width": "3",
+        "height": "1",
+        "name": "",
+        "label": "Fan",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 770,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "f16d5986.777958",
+        "type": "mqtt-broker",
+        "name": "emon",
+        "broker": "192.168.1.21",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "a2df0269.797588",
+        "type": "emoncms-server",
+        "server": "http://192.168.1.29/emoncms",
+        "name": "emon"
+    },
+    {
+        "id": "5600fc7c.c6b574",
+        "type": "ui_group",
+        "name": "House Power",
+        "tab": "89b2fb2d.d492d8",
+        "order": 1,
+        "disp": true,
+        "width": "4",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "150853bc.b605bc",
+        "type": "ui_group",
+        "name": "Outside",
+        "tab": "89b2fb2d.d492d8",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "e4aa4c6.ed493b",
+        "type": "ui_group",
+        "name": "Inside Temps",
+        "tab": "89b2fb2d.d492d8",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "58edee5c.4f0f7",
+        "type": "ui_group",
+        "name": "Unheated",
+        "tab": "89b2fb2d.d492d8",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "1f697ae0.735f35",
+        "type": "tasmota-mqtt-broker",
+        "name": "pi32131",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "keepalive": "60",
+        "cleansession": true
+    },
+    {
+        "id": "89b2fb2d.d492d8",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
