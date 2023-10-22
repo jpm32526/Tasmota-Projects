@@ -1,0 +1,975 @@
+[
+    {
+        "id": "181ebae.427af45",
+        "type": "tab",
+        "label": "Tasmota",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c1aa56ff.b14e78",
+        "type": "mqtt in",
+        "z": "181ebae.427af45",
+        "name": "",
+        "topic": "stat/Box4/POWER1",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 170,
+        "y": 80,
+        "wires": [
+            [
+                "5472bf06.015ec"
+            ]
+        ]
+    },
+    {
+        "id": "63ff6881.463a18",
+        "type": "debug",
+        "z": "181ebae.427af45",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 790,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ccd2aa21.514678",
+        "type": "mqtt out",
+        "z": "181ebae.427af45",
+        "name": "",
+        "topic": "cmnd/Box4/power1",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 390,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "a3fe5654.a107d8",
+        "type": "inject",
+        "z": "181ebae.427af45",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "off",
+        "payloadType": "str",
+        "x": 170,
+        "y": 300,
+        "wires": [
+            [
+                "ccd2aa21.514678"
+            ]
+        ]
+    },
+    {
+        "id": "9d353b99.5aa628",
+        "type": "inject",
+        "z": "181ebae.427af45",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "on",
+        "payloadType": "str",
+        "x": 170,
+        "y": 340,
+        "wires": [
+            [
+                "ccd2aa21.514678"
+            ]
+        ]
+    },
+    {
+        "id": "680a7b7d.d2baa4",
+        "type": "inject",
+        "z": "181ebae.427af45",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 170,
+        "y": 380,
+        "wires": [
+            [
+                "ccd2aa21.514678"
+            ]
+        ]
+    },
+    {
+        "id": "d73ca460.a6f9b8",
+        "type": "comment",
+        "z": "181ebae.427af45",
+        "name": "Subscribe to all messages",
+        "info": "This is just to subscribe to all messages \ncoming from ESPurna. You can turn this off\nonce you are completed the setup.\n\nHere I put the same topic ID as what I entered\non the UI and # at the end.",
+        "x": 150,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "bb4c6492.c181e8",
+        "type": "comment",
+        "z": "181ebae.427af45",
+        "name": "MQTT control",
+        "info": "Controlling the relay via MQTT\n\nroot topic followed by relay/0/set\naccepted messages:\n0: off\n1: on\n2: toggle",
+        "x": 130,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "1aadef2e.7a6461",
+        "type": "mqtt out",
+        "z": "181ebae.427af45",
+        "name": "",
+        "topic": "cmnd/Box4/status",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 370,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "ba7373d.040b89",
+        "type": "inject",
+        "z": "181ebae.427af45",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "1aadef2e.7a6461"
+            ]
+        ]
+    },
+    {
+        "id": "b397fa40.e6bcb8",
+        "type": "json",
+        "z": "181ebae.427af45",
+        "name": "",
+        "pretty": false,
+        "x": 610,
+        "y": 80,
+        "wires": [
+            [
+                "63ff6881.463a18"
+            ]
+        ]
+    },
+    {
+        "id": "5472bf06.015ec",
+        "type": "switch",
+        "z": "181ebae.427af45",
+        "name": "JSON format?",
+        "property": "$substring(msg.payload, 0, 1)=\"{\"",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 380,
+        "y": 80,
+        "wires": [
+            [
+                "b397fa40.e6bcb8"
+            ],
+            [
+                "63ff6881.463a18"
+            ]
+        ]
+    },
+    {
+        "id": "c687fd48.8ab08",
+        "type": "inject",
+        "z": "181ebae.427af45",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "topic": "",
+        "payload": "blink",
+        "payloadType": "str",
+        "x": 170,
+        "y": 420,
+        "wires": [
+            [
+                "ccd2aa21.514678"
+            ]
+        ]
+    },
+    {
+        "id": "b03db395.42b01",
+        "type": "mqtt in",
+        "z": "181ebae.427af45",
+        "name": "",
+        "topic": "tele/Box4/POWER1",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 170,
+        "y": 140,
+        "wires": [
+            [
+                "5472bf06.015ec"
+            ]
+        ]
+    },
+    {
+        "id": "3915750.222fa8c",
+        "type": "comment",
+        "z": "181ebae.427af45",
+        "name": "Control from UI",
+        "info": "This section shows a simple dashboard UI to \ncontrol and display the status of the unit.\n\nI use MQTT to control it, but it could also be\nHTTP as well.",
+        "x": 120,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "76bacf4d.9011c",
+        "type": "ui_switch",
+        "z": "181ebae.427af45",
+        "name": "",
+        "label": "Switch relay",
+        "group": "12e8425e.99449e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 150,
+        "y": 880,
+        "wires": [
+            [
+                "37105e76.de1182"
+            ]
+        ]
+    },
+    {
+        "id": "37105e76.de1182",
+        "type": "mqtt out",
+        "z": "181ebae.427af45",
+        "name": "",
+        "topic": "cmnd/Box4/power1",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 530,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "eef7866d.e61608",
+        "type": "ui_button",
+        "z": "181ebae.427af45",
+        "name": "",
+        "group": "12e8425e.99449e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Toggle relay",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 920,
+        "wires": [
+            [
+                "37105e76.de1182"
+            ]
+        ]
+    },
+    {
+        "id": "78f75a7c.c76df4",
+        "type": "ui_template",
+        "z": "181ebae.427af45",
+        "group": "12e8425e.99449e",
+        "name": "Relay state",
+        "order": 3,
+        "width": "",
+        "height": "",
+        "format": "<div layout=\"row\" layout-align=\"space-between\">\n    <p>Relay state</p>\n    <p ng-style=\"{color: msg.payload === 'ON' ? 'blue' : 'grey'}\">\n        <b>{{msg.payload === 'ON' ? 'ON' : 'OFF'}}</b>\n    </p>\n</div>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 510,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b1e90981.e768a8",
+        "type": "mqtt in",
+        "z": "181ebae.427af45",
+        "name": "",
+        "topic": "stat/Box4/POWER1",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 170,
+        "y": 1060,
+        "wires": [
+            [
+                "78f75a7c.c76df4"
+            ]
+        ]
+    },
+    {
+        "id": "f3e24c3f.17bdb",
+        "type": "ui_button",
+        "z": "181ebae.427af45",
+        "name": "",
+        "group": "12e8425e.99449e",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Turn On",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "on",
+        "payloadType": "str",
+        "topic": "",
+        "x": 140,
+        "y": 960,
+        "wires": [
+            [
+                "37105e76.de1182"
+            ]
+        ]
+    },
+    {
+        "id": "bf52119c.64815",
+        "type": "ui_slider",
+        "z": "181ebae.427af45",
+        "name": "",
+        "label": "Pulse Time",
+        "tooltip": "",
+        "group": "12e8425e.99449e",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "",
+        "topicType": "str",
+        "min": 0,
+        "max": "200",
+        "step": 1,
+        "className": "",
+        "x": 150,
+        "y": 1140,
+        "wires": [
+            [
+                "9afc0d4d.5af65"
+            ]
+        ]
+    },
+    {
+        "id": "9afc0d4d.5af65",
+        "type": "mqtt out",
+        "z": "181ebae.427af45",
+        "name": "",
+        "topic": "cmnd/Box4/PulseTime",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 600,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "e6239a94.1e8088",
+        "type": "mqtt in",
+        "z": "181ebae.427af45",
+        "name": "",
+        "topic": "tele/Box4/STATE",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 160,
+        "y": 1240,
+        "wires": [
+            [
+                "39dc90ea.ef63"
+            ]
+        ]
+    },
+    {
+        "id": "119c1e6f.33b242",
+        "type": "function",
+        "z": "181ebae.427af45",
+        "name": "Store last update",
+        "func": "var devicename = \"Box4\";\n\nvar temp = global.get(devicename+\"_wifi\");\nvar current = new Date();\nif (temp!== undefined && temp!==null) {\n    msg.payload = current.getTime() - temp;\n    global.set(devicename+\"_wifi\",current.getTime());\n} else {\n    msg.payload = \"\";\n    global.set(devicename+\"_wifi\",current.getTime());\n}\n\n// Update the status with current timestamp\nvar now = new Date();\nvar yyyy = now.getFullYear();\nvar mm = now.getMonth() < 9 ? \"0\" + (now.getMonth() + 1) : (now.getMonth() + 1); // getMonth() is zero-based\nvar dd  = now.getDate() < 10 ? \"0\" + now.getDate() : now.getDate();\nvar hh = now.getHours() < 10 ? \"0\" + now.getHours() : now.getHours();\nvar mmm  = now.getMinutes() < 10 ? \"0\" + now.getMinutes() : now.getMinutes();\nvar ss  = now.getSeconds() < 10 ? \"0\" + now.getSeconds() : now.getSeconds();\nnode.status({fill:\"blue\",shape:\"ring\",text:\"Last update: \"+dd + \".\" + mm + \".\" + yyyy + \" \" + hh + \":\" + mmm + \":\" + ss});\n\nmsg.formattedtime = dd + \".\" + mm + \".\" + yyyy + \" \" + hh + \":\" + mmm + \":\" + ss;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 1320,
+        "wires": [
+            [
+                "df74ded89fdd6e9f"
+            ]
+        ]
+    },
+    {
+        "id": "8eb394c3.8f6ef8",
+        "type": "inject",
+        "z": "181ebae.427af45",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 1400,
+        "wires": [
+            [
+                "38183682.36655a"
+            ]
+        ]
+    },
+    {
+        "id": "38183682.36655a",
+        "type": "function",
+        "z": "181ebae.427af45",
+        "name": "From last update",
+        "func": "// @ts-nocheck\nvar devicename = \"Box4\";\n\nvar temp = global.get(devicename + \"_wifi\");\nvar current = new Date();\nmsg.payload = \"No data\";\nmsg.warning = false;\n\nif (temp !== undefined) {\n    current = current - temp;\n    current = Math.floor(current / 1000);\n    var minute = Math.floor(current / 60);\n    var hour = Math.floor(minute / 60);\n    var day = Math.floor(hour / 24);\n    if (current > 24 * 60 * 60) {\n        msg.payload = \"Last update \" + day + \" days, \" + hour % 24 + \" hours, \" + minute % 60 + \" minutes, \" + current % 60 + \" seconds ago\";\n    } else if (current > 60 * 60) {\n        msg.payload = \"Last update \" + hour % 24 + \" hours, \" + minute % 60 + \" minutes, \" + current % 60 + \" seconds ago\";\n    } else if (current > 60) {\n        msg.payload = \"Last update \" + minute % 60 + \" minutes, \" + current % 60 + \" seconds ago\";\n    } else {\n        msg.payload = \"Last update \" + current % 60 + \" seconds ago\";\n    }\n\n}\n\nnode.status({ fill: \"blue\", shape: \"ring\", text: msg.payload });\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1400,
+        "wires": [
+            [
+                "d4b0f7eb.5a2178"
+            ]
+        ]
+    },
+    {
+        "id": "17128322.7905fd",
+        "type": "ui_text",
+        "z": "181ebae.427af45",
+        "group": "12e8425e.99449e",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Uptime",
+        "format": "{{msg.payload.Uptime}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 820,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "d4b0f7eb.5a2178",
+        "type": "ui_text",
+        "z": "181ebae.427af45",
+        "group": "12e8425e.99449e",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "Last Update",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 630,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "e4100f8d.81bf5",
+        "type": "ui_gauge",
+        "z": "181ebae.427af45",
+        "name": "Voltage level",
+        "group": "12e8425e.99449e",
+        "order": 8,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Voltage level",
+        "label": "",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "5",
+        "colors": [
+            "#ff0000",
+            "#e6e600",
+            "#00b500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 830,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "39dc90ea.ef63",
+        "type": "json",
+        "z": "181ebae.427af45",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 350,
+        "y": 1240,
+        "wires": [
+            [
+                "119c1e6f.33b242",
+                "4c8ea663.ccc388",
+                "202ebdb349911143"
+            ]
+        ]
+    },
+    {
+        "id": "4c6731d4.ec9e2",
+        "type": "inject",
+        "z": "181ebae.427af45",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 560,
+        "wires": [
+            [
+                "645e0b44.542954"
+            ]
+        ]
+    },
+    {
+        "id": "645e0b44.542954",
+        "type": "http request",
+        "z": "181ebae.427af45",
+        "name": "Relay off",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.129/cm?cmnd=POWER OFF",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 380,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bdd35d4d.e8a0f",
+        "type": "inject",
+        "z": "181ebae.427af45",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 600,
+        "wires": [
+            [
+                "a696085c.4320a8"
+            ]
+        ]
+    },
+    {
+        "id": "a696085c.4320a8",
+        "type": "http request",
+        "z": "181ebae.427af45",
+        "name": "Relay on",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://192.168.1.129/cm?cmnd=POWER ON",
+        "tls": "",
+        "x": 380,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a1c7504.74d50c",
+        "type": "http request",
+        "z": "181ebae.427af45",
+        "name": "Relay toggle",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://192.168.1.129/cm?cmnd=POWER TOGGLE",
+        "tls": "",
+        "x": 390,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ec24064b.f628d8",
+        "type": "inject",
+        "z": "181ebae.427af45",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 640,
+        "wires": [
+            [
+                "6a1c7504.74d50c"
+            ]
+        ]
+    },
+    {
+        "id": "1c715e7d.da7d72",
+        "type": "http request",
+        "z": "181ebae.427af45",
+        "name": "Status",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://192.168.1.129/cm?cmnd=STATUS",
+        "tls": "",
+        "x": 370,
+        "y": 700,
+        "wires": [
+            [
+                "26418c87.51e1b4"
+            ]
+        ]
+    },
+    {
+        "id": "67314bd.aaa56b4",
+        "type": "inject",
+        "z": "181ebae.427af45",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 700,
+        "wires": [
+            [
+                "1c715e7d.da7d72"
+            ]
+        ]
+    },
+    {
+        "id": "26418c87.51e1b4",
+        "type": "debug",
+        "z": "181ebae.427af45",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 570,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "cf7d1162.961f8",
+        "type": "comment",
+        "z": "181ebae.427af45",
+        "name": "HTTP control",
+        "info": "Controlling the relay via HTTP\nHTTP API in the admin page need to be turned off\nCopy the api key from the admin page\n\nURL http://<ip>/api/relay/0?apikey=<api key>&value=0\naccepted values (at the end):\n0: off\n1: on\n2: toggle",
+        "x": 130,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "8d09887b.9f33e8",
+        "type": "ui_button",
+        "z": "181ebae.427af45",
+        "name": "",
+        "group": "12e8425e.99449e",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Turn Off",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "off",
+        "payloadType": "str",
+        "topic": "",
+        "x": 140,
+        "y": 1000,
+        "wires": [
+            [
+                "37105e76.de1182"
+            ]
+        ]
+    },
+    {
+        "id": "4c8ea663.ccc388",
+        "type": "change",
+        "z": "181ebae.427af45",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.Vss",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 1280,
+        "wires": [
+            [
+                "e4100f8d.81bf5"
+            ]
+        ]
+    },
+    {
+        "id": "df74ded89fdd6e9f",
+        "type": "debug",
+        "z": "181ebae.427af45",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "202ebdb349911143",
+        "type": "change",
+        "z": "181ebae.427af45",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.Uptime",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 1240,
+        "wires": [
+            [
+                "17128322.7905fd"
+            ]
+        ]
+    },
+    {
+        "id": "769be7938a8353ae",
+        "type": "comment",
+        "z": "181ebae.427af45",
+        "name": "flow code stashed here",
+        "info": "Change mqtt server to point to this system. Triple-click line below and copy.\n\n\n[{\"id\":\"181ebae.427af45\",\"type\":\"tab\",\"label\":\"Tasmota\",\"disabled\":false,\"info\":\"\"},{\"id\":\"c1aa56ff.b14e78\",\"type\":\"mqtt in\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"stat/Sonoff5/#\",\"qos\":\"0\",\"broker\":\"cea5258a.b34038\",\"x\":150,\"y\":80,\"wires\":[[\"5472bf06.015ec\"]]},{\"id\":\"63ff6881.463a18\",\"type\":\"debug\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"active\":true,\"console\":\"false\",\"complete\":\"false\",\"x\":790,\"y\":140,\"wires\":[]},{\"id\":\"ccd2aa21.514678\",\"type\":\"mqtt out\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"cmnd/Sonoff5/power\",\"qos\":\"0\",\"retain\":\"\",\"broker\":\"cea5258a.b34038\",\"x\":400,\"y\":300,\"wires\":[]},{\"id\":\"a3fe5654.a107d8\",\"type\":\"inject\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"\",\"payload\":\"off\",\"payloadType\":\"str\",\"repeat\":\"\",\"crontab\":\"\",\"once\":false,\"x\":170,\"y\":300,\"wires\":[[\"ccd2aa21.514678\"]]},{\"id\":\"9d353b99.5aa628\",\"type\":\"inject\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"\",\"payload\":\"on\",\"payloadType\":\"str\",\"repeat\":\"\",\"crontab\":\"\",\"once\":false,\"x\":170,\"y\":340,\"wires\":[[\"ccd2aa21.514678\"]]},{\"id\":\"680a7b7d.d2baa4\",\"type\":\"inject\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"\",\"payload\":\"toggle\",\"payloadType\":\"str\",\"repeat\":\"\",\"crontab\":\"\",\"once\":false,\"x\":170,\"y\":380,\"wires\":[[\"ccd2aa21.514678\"]]},{\"id\":\"d73ca460.a6f9b8\",\"type\":\"comment\",\"z\":\"181ebae.427af45\",\"name\":\"Subscribe to all messages\",\"info\":\"This is just to subscribe to all messages \\ncoming from ESPurna. You can turn this off\\nonce you are completed the setup.\\n\\nHere I put the same topic ID as what I entered\\non the UI and # at the end.\",\"x\":150,\"y\":40,\"wires\":[]},{\"id\":\"bb4c6492.c181e8\",\"type\":\"comment\",\"z\":\"181ebae.427af45\",\"name\":\"MQTT control\",\"info\":\"Controlling the relay via MQTT\\n\\nroot topic followed by relay/0/set\\naccepted messages:\\n0: off\\n1: on\\n2: toggle\",\"x\":130,\"y\":260,\"wires\":[]},{\"id\":\"1aadef2e.7a6461\",\"type\":\"mqtt out\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"cmnd/Sonoff5/status\",\"qos\":\"0\",\"retain\":\"\",\"broker\":\"cea5258a.b34038\",\"x\":380,\"y\":200,\"wires\":[]},{\"id\":\"ba7373d.040b89\",\"type\":\"inject\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"\",\"payload\":\"0\",\"payloadType\":\"num\",\"repeat\":\"\",\"crontab\":\"\",\"once\":false,\"x\":150,\"y\":200,\"wires\":[[\"1aadef2e.7a6461\"]]},{\"id\":\"b397fa40.e6bcb8\",\"type\":\"json\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"pretty\":false,\"x\":610,\"y\":80,\"wires\":[[\"63ff6881.463a18\"]]},{\"id\":\"5472bf06.015ec\",\"type\":\"switch\",\"z\":\"181ebae.427af45\",\"name\":\"JSON format?\",\"property\":\"$substring(msg.payload, 0, 1)=\\\"{\\\"\",\"propertyType\":\"jsonata\",\"rules\":[{\"t\":\"true\"},{\"t\":\"false\"}],\"checkall\":\"true\",\"outputs\":2,\"x\":380,\"y\":80,\"wires\":[[\"b397fa40.e6bcb8\"],[\"63ff6881.463a18\"]]},{\"id\":\"c687fd48.8ab08\",\"type\":\"inject\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"\",\"payload\":\"blink\",\"payloadType\":\"str\",\"repeat\":\"\",\"crontab\":\"\",\"once\":false,\"x\":170,\"y\":420,\"wires\":[[\"ccd2aa21.514678\"]]},{\"id\":\"b03db395.42b01\",\"type\":\"mqtt in\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"tele/Sonoff5/#\",\"qos\":\"0\",\"broker\":\"cea5258a.b34038\",\"x\":150,\"y\":140,\"wires\":[[\"5472bf06.015ec\"]]},{\"id\":\"3915750.222fa8c\",\"type\":\"comment\",\"z\":\"181ebae.427af45\",\"name\":\"Control from UI\",\"info\":\"This section shows a simple dashboard UI to \\ncontrol and display the status of the unit.\\n\\nI use MQTT to control it, but it could also be\\nHTTP as well.\",\"x\":120,\"y\":840,\"wires\":[]},{\"id\":\"76bacf4d.9011c\",\"type\":\"ui_switch\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"label\":\"Switch relay\",\"group\":\"12e8425e.99449e\",\"order\":1,\"width\":0,\"height\":0,\"passthru\":true,\"decouple\":\"false\",\"topic\":\"\",\"style\":\"\",\"onvalue\":\"on\",\"onvalueType\":\"str\",\"onicon\":\"\",\"oncolor\":\"\",\"offvalue\":\"off\",\"offvalueType\":\"str\",\"officon\":\"\",\"offcolor\":\"\",\"x\":150,\"y\":880,\"wires\":[[\"37105e76.de1182\"]]},{\"id\":\"37105e76.de1182\",\"type\":\"mqtt out\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"cmnd/Sonoff5/power\",\"qos\":\"0\",\"retain\":\"\",\"broker\":\"cea5258a.b34038\",\"x\":540,\"y\":880,\"wires\":[]},{\"id\":\"eef7866d.e61608\",\"type\":\"ui_button\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"group\":\"12e8425e.99449e\",\"order\":2,\"width\":0,\"height\":0,\"passthru\":false,\"label\":\"Toggle relay\",\"color\":\"\",\"bgcolor\":\"\",\"icon\":\"\",\"payload\":\"toggle\",\"payloadType\":\"str\",\"topic\":\"\",\"x\":150,\"y\":920,\"wires\":[[\"37105e76.de1182\"]]},{\"id\":\"78f75a7c.c76df4\",\"type\":\"ui_template\",\"z\":\"181ebae.427af45\",\"group\":\"12e8425e.99449e\",\"name\":\"Relay state\",\"order\":3,\"width\":\"\",\"height\":\"\",\"format\":\"<div layout=\\\"row\\\" layout-align=\\\"space-between\\\">\\n    <p>Relay state</p>\\n    <p ng-style=\\\"{color: msg.payload === 'ON' ? 'blue' : 'grey'}\\\">\\n        <b>{{msg.payload === 'ON' ? 'ON' : 'OFF'}}</b>\\n    </p>\\n</div>\",\"storeOutMessages\":false,\"fwdInMessages\":false,\"templateScope\":\"local\",\"x\":510,\"y\":1060,\"wires\":[[]]},{\"id\":\"b1e90981.e768a8\",\"type\":\"mqtt in\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"stat/Sonoff5/POWER\",\"qos\":\"0\",\"broker\":\"cea5258a.b34038\",\"x\":180,\"y\":1060,\"wires\":[[\"78f75a7c.c76df4\"]]},{\"id\":\"f3e24c3f.17bdb\",\"type\":\"ui_button\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"group\":\"12e8425e.99449e\",\"order\":4,\"width\":0,\"height\":0,\"passthru\":false,\"label\":\"Turn On\",\"color\":\"\",\"bgcolor\":\"\",\"icon\":\"\",\"payload\":\"on\",\"payloadType\":\"str\",\"topic\":\"\",\"x\":140,\"y\":960,\"wires\":[[\"37105e76.de1182\"]]},{\"id\":\"bf52119c.64815\",\"type\":\"ui_slider\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"label\":\"Pulse Time\",\"group\":\"12e8425e.99449e\",\"order\":6,\"width\":0,\"height\":0,\"passthru\":true,\"topic\":\"\",\"min\":0,\"max\":\"200\",\"step\":1,\"x\":150,\"y\":1140,\"wires\":[[\"9afc0d4d.5af65\"]]},{\"id\":\"9afc0d4d.5af65\",\"type\":\"mqtt out\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"cmnd/Sonoff5/PulseTime\",\"qos\":\"0\",\"retain\":\"\",\"broker\":\"cea5258a.b34038\",\"x\":610,\"y\":1140,\"wires\":[]},{\"id\":\"e6239a94.1e8088\",\"type\":\"mqtt in\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"tele/Sonoff5/STATE\",\"qos\":\"0\",\"broker\":\"cea5258a.b34038\",\"x\":170,\"y\":1240,\"wires\":[[\"39dc90ea.ef63\"]]},{\"id\":\"119c1e6f.33b242\",\"type\":\"function\",\"z\":\"181ebae.427af45\",\"name\":\"Store last update\",\"func\":\"var devicename = \\\"Sonoff5\\\";\\n\\nvar temp = global.get(devicename+\\\"_wifi\\\");\\nvar current = new Date();\\nif (temp!== undefined && temp!==null) {\\n    msg.payload = current.getTime() - temp;\\n    global.set(devicename+\\\"_wifi\\\",current.getTime());\\n} else {\\n    msg.payload = \\\"\\\";\\n    global.set(devicename+\\\"_wifi\\\",current.getTime());\\n}\\n\\n// Update the status with current timestamp\\nvar now = new Date();\\nvar yyyy = now.getFullYear();\\nvar mm = now.getMonth() < 9 ? \\\"0\\\" + (now.getMonth() + 1) : (now.getMonth() + 1); // getMonth() is zero-based\\nvar dd  = now.getDate() < 10 ? \\\"0\\\" + now.getDate() : now.getDate();\\nvar hh = now.getHours() < 10 ? \\\"0\\\" + now.getHours() : now.getHours();\\nvar mmm  = now.getMinutes() < 10 ? \\\"0\\\" + now.getMinutes() : now.getMinutes();\\nvar ss  = now.getSeconds() < 10 ? \\\"0\\\" + now.getSeconds() : now.getSeconds();\\nnode.status({fill:\\\"blue\\\",shape:\\\"ring\\\",text:\\\"Last update: \\\"+dd + \\\".\\\" + mm + \\\".\\\" + yyyy + \\\" \\\" + hh + \\\":\\\" + mmm + \\\":\\\" + ss});\\n\\nmsg.formattedtime = dd + \\\".\\\" + mm + \\\".\\\" + yyyy + \\\" \\\" + hh + \\\":\\\" + mmm + \\\":\\\" + ss;\\n\\nreturn msg;\",\"outputs\":1,\"noerr\":0,\"x\":650,\"y\":1340,\"wires\":[[]]},{\"id\":\"8eb394c3.8f6ef8\",\"type\":\"inject\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"\",\"payload\":\"\",\"payloadType\":\"date\",\"repeat\":\"1\",\"crontab\":\"\",\"once\":false,\"x\":170,\"y\":1400,\"wires\":[[\"38183682.36655a\"]]},{\"id\":\"38183682.36655a\",\"type\":\"function\",\"z\":\"181ebae.427af45\",\"name\":\"From last update\",\"func\":\"var devicename = \\\"Sonoff5\\\";\\n\\nvar temp = global.get(devicename+\\\"_wifi\\\");\\nvar current = new Date();\\nmsg.payload = \\\"No data\\\";\\nmsg.warning = false;\\n\\nif (temp!==undefined) {\\n    current = current - temp;\\n    current = Math.floor(current/1000);\\n    var minute = Math.floor(current/60);\\n    var hour = Math.floor(minute/60);\\n    var day = Math.floor(hour/24);\\n    if (current>24*60*60) {\\n        msg.payload = \\\"Last update \\\" + day + \\\" days, \\\" + hour%24 + \\\" hours, \\\" + minute%60 + \\\" minutes, \\\" + current%60 + \\\" seconds ago\\\";\\n    } else if (current>60*60) {\\n        msg.payload = \\\"Last update \\\" + hour%24 + \\\" hours, \\\" + minute%60 + \\\" minutes, \\\" + current%60 + \\\" seconds ago\\\";\\n    } else if (current>60) {\\n        msg.payload = \\\"Last update \\\" + minute%60 + \\\" minutes, \\\" + current%60 + \\\" seconds ago\\\";\\n    } else {\\n        msg.payload = \\\"Last update \\\" + current%60 + \\\" seconds ago\\\";\\n    }\\n\\n}\\n\\nnode.status({fill:\\\"blue\\\",shape:\\\"ring\\\",text:msg.payload});\\n\\n\\nreturn msg;\",\"outputs\":1,\"noerr\":0,\"x\":410,\"y\":1400,\"wires\":[[\"d4b0f7eb.5a2178\"]]},{\"id\":\"17128322.7905fd\",\"type\":\"ui_text\",\"z\":\"181ebae.427af45\",\"group\":\"12e8425e.99449e\",\"order\":7,\"width\":0,\"height\":0,\"name\":\"\",\"label\":\"Uptime\",\"format\":\"{{msg.payload.Uptime}}\",\"layout\":\"row-spread\",\"x\":620,\"y\":1240,\"wires\":[]},{\"id\":\"d4b0f7eb.5a2178\",\"type\":\"ui_text\",\"z\":\"181ebae.427af45\",\"group\":\"12e8425e.99449e\",\"order\":9,\"width\":0,\"height\":0,\"name\":\"Last Update\",\"label\":\"\",\"format\":\"{{msg.payload}}\",\"layout\":\"row-spread\",\"x\":630,\"y\":1400,\"wires\":[]},{\"id\":\"e4100f8d.81bf5\",\"type\":\"ui_gauge\",\"z\":\"181ebae.427af45\",\"name\":\"Wifi gauge\",\"group\":\"12e8425e.99449e\",\"order\":8,\"width\":0,\"height\":0,\"gtype\":\"gage\",\"title\":\"\",\"label\":\"\",\"format\":\"{{value}}\",\"min\":\"0\",\"max\":\"100\",\"colors\":[\"#ff0000\",\"#e6e600\",\"#00b500\"],\"seg1\":\"\",\"seg2\":\"\",\"x\":830,\"y\":1300,\"wires\":[]},{\"id\":\"39dc90ea.ef63\",\"type\":\"json\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"pretty\":false,\"x\":350,\"y\":1240,\"wires\":[[\"17128322.7905fd\",\"119c1e6f.33b242\",\"4c8ea663.ccc388\"]]},{\"id\":\"4c6731d4.ec9e2\",\"type\":\"inject\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"\",\"payload\":\"\",\"payloadType\":\"date\",\"repeat\":\"\",\"crontab\":\"\",\"once\":false,\"x\":180,\"y\":560,\"wires\":[[\"645e0b44.542954\"]]},{\"id\":\"645e0b44.542954\",\"type\":\"http request\",\"z\":\"181ebae.427af45\",\"name\":\"Relay off\",\"method\":\"GET\",\"ret\":\"txt\",\"url\":\"http://192.168.1.129/cm?cmnd=POWER OFF\",\"tls\":\"\",\"x\":380,\"y\":560,\"wires\":[[]]},{\"id\":\"bdd35d4d.e8a0f\",\"type\":\"inject\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"\",\"payload\":\"\",\"payloadType\":\"date\",\"repeat\":\"\",\"crontab\":\"\",\"once\":false,\"x\":180,\"y\":600,\"wires\":[[\"a696085c.4320a8\"]]},{\"id\":\"a696085c.4320a8\",\"type\":\"http request\",\"z\":\"181ebae.427af45\",\"name\":\"Relay on\",\"method\":\"GET\",\"ret\":\"txt\",\"url\":\"http://192.168.1.129/cm?cmnd=POWER ON\",\"tls\":\"\",\"x\":380,\"y\":600,\"wires\":[[]]},{\"id\":\"6a1c7504.74d50c\",\"type\":\"http request\",\"z\":\"181ebae.427af45\",\"name\":\"Relay toggle\",\"method\":\"GET\",\"ret\":\"txt\",\"url\":\"http://192.168.1.129/cm?cmnd=POWER TOGGLE\",\"tls\":\"\",\"x\":390,\"y\":640,\"wires\":[[]]},{\"id\":\"ec24064b.f628d8\",\"type\":\"inject\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"\",\"payload\":\"\",\"payloadType\":\"date\",\"repeat\":\"\",\"crontab\":\"\",\"once\":false,\"x\":180,\"y\":640,\"wires\":[[\"6a1c7504.74d50c\"]]},{\"id\":\"1c715e7d.da7d72\",\"type\":\"http request\",\"z\":\"181ebae.427af45\",\"name\":\"Status\",\"method\":\"GET\",\"ret\":\"txt\",\"url\":\"http://192.168.1.129/cm?cmnd=STATUS\",\"tls\":\"\",\"x\":370,\"y\":700,\"wires\":[[\"26418c87.51e1b4\"]]},{\"id\":\"67314bd.aaa56b4\",\"type\":\"inject\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"topic\":\"\",\"payload\":\"\",\"payloadType\":\"date\",\"repeat\":\"\",\"crontab\":\"\",\"once\":false,\"x\":180,\"y\":700,\"wires\":[[\"1c715e7d.da7d72\"]]},{\"id\":\"26418c87.51e1b4\",\"type\":\"debug\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"active\":true,\"console\":\"false\",\"complete\":\"false\",\"x\":570,\"y\":700,\"wires\":[]},{\"id\":\"cf7d1162.961f8\",\"type\":\"comment\",\"z\":\"181ebae.427af45\",\"name\":\"HTTP control\",\"info\":\"Controlling the relay via HTTP\\nHTTP API in the admin page need to be turned off\\nCopy the api key from the admin page\\n\\nURL http://<ip>/api/relay/0?apikey=<api key>&value=0\\naccepted values (at the end):\\n0: off\\n1: on\\n2: toggle\",\"x\":130,\"y\":520,\"wires\":[]},{\"id\":\"8d09887b.9f33e8\",\"type\":\"ui_button\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"group\":\"12e8425e.99449e\",\"order\":5,\"width\":0,\"height\":0,\"passthru\":false,\"label\":\"Turn Off\",\"color\":\"\",\"bgcolor\":\"\",\"icon\":\"\",\"payload\":\"off\",\"payloadType\":\"str\",\"topic\":\"\",\"x\":140,\"y\":1000,\"wires\":[[\"37105e76.de1182\"]]},{\"id\":\"4c8ea663.ccc388\",\"type\":\"change\",\"z\":\"181ebae.427af45\",\"name\":\"\",\"rules\":[{\"t\":\"set\",\"p\":\"payload\",\"pt\":\"msg\",\"to\":\"payload.Wifi.RSSI\",\"tot\":\"msg\"}],\"action\":\"\",\"property\":\"\",\"from\":\"\",\"to\":\"\",\"reg\":false,\"x\":640,\"y\":1300,\"wires\":[[\"e4100f8d.81bf5\"]]},{\"id\":\"cea5258a.b34038\",\"type\":\"mqtt-broker\",\"z\":\"\",\"broker\":\"192.168.1.80\",\"port\":\"1883\",\"clientid\":\"node-red\",\"usetls\":false,\"compatmode\":true,\"keepalive\":\"60\",\"cleansession\":true,\"willTopic\":\"\",\"willQos\":\"0\",\"willPayload\":\"\",\"birthTopic\":\"\",\"birthQos\":\"0\",\"birthPayload\":\"\"},{\"id\":\"12e8425e.99449e\",\"type\":\"ui_group\",\"z\":\"\",\"name\":\"Sonoff Basic\",\"tab\":\"43af4535.136d5c\",\"disp\":true,\"width\":\"6\"},{\"id\":\"43af4535.136d5c\",\"type\":\"ui_tab\",\"z\":\"\",\"name\":\"Tasmota\",\"icon\":\"dashboard\"}]",
+        "x": 760,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "7750bcb.fd7ad44",
+        "type": "mqtt-broker",
+        "name": "mqtt_pi",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "12e8425e.99449e",
+        "type": "ui_group",
+        "name": "Sonoff Basic",
+        "tab": "43af4535.136d5c",
+        "order": 1,
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "43af4535.136d5c",
+        "type": "ui_tab",
+        "name": "Tasmota",
+        "icon": "dashboard"
+    }
+]
