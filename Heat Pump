@@ -1,0 +1,1205 @@
+[
+    {
+        "id": "b63f705d.be3218",
+        "type": "tab",
+        "label": "Heat Pump",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a7cc3a08.328ad",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "c424609e.ee0a5",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Volts",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 710,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "6da4d038.503bc8",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "c424609e.ee0a5",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Current",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 720,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "47de1c93.8d1b9c",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "c424609e.ee0a5",
+        "order": 6,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Energy Total",
+        "format": "{{msg.payload | number:2}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 730,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "264d8b4b.56976c",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "c424609e.ee0a5",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Energy Yesterday",
+        "format": "{{msg.payload | number:3}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 750,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "127ece48.d63cc2",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "c424609e.ee0a5",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "True Power",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 730,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e22aef5a.ac468",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "c424609e.ee0a5",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Energy Today",
+        "format": "{{msg.payload | number:3}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 740,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "3815de9b.51160a",
+        "type": "Tasmota Sensor",
+        "z": "b63f705d.be3218",
+        "broker": "1f697ae0.735f35",
+        "device": "sensors/pwr/OSHP",
+        "name": "Outside HP",
+        "outputs": 6,
+        "uidisabler": true,
+        "fullTopic": "",
+        "cmndPrefix": "",
+        "statPrefix": "",
+        "telePrefix": "",
+        "rules": [
+            "ENERGY.Voltage",
+            "ENERGY.Current",
+            "ENERGY.Power",
+            "ENERGY.Today",
+            "ENERGY.Yesterday",
+            "ENERGY.Total"
+        ],
+        "outputTopic": "OSHP",
+        "x": 350,
+        "y": 120,
+        "wires": [
+            [
+                "a7cc3a08.328ad"
+            ],
+            [
+                "6da4d038.503bc8"
+            ],
+            [
+                "127ece48.d63cc2",
+                "892d7fd5.b9deb"
+            ],
+            [
+                "e22aef5a.ac468",
+                "ebc1cde9.c0ff"
+            ],
+            [
+                "264d8b4b.56976c",
+                "c5344593d0096dac"
+            ],
+            [
+                "47de1c93.8d1b9c"
+            ]
+        ]
+    },
+    {
+        "id": "4c91c50c.51c744",
+        "type": "inject",
+        "z": "b63f705d.be3218",
+        "name": "5 sec",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 280,
+        "wires": [
+            [
+                "3b6cbf39.2194f",
+                "3815de9b.51160a"
+            ]
+        ]
+    },
+    {
+        "id": "3b6cbf39.2194f",
+        "type": "Tasmota Sensor",
+        "z": "b63f705d.be3218",
+        "broker": "1f697ae0.735f35",
+        "device": "sensors/pwr/ISHP",
+        "name": "Inside HP",
+        "outputs": 9,
+        "uidisabler": false,
+        "fullTopic": "",
+        "cmndPrefix": "",
+        "statPrefix": "",
+        "telePrefix": "",
+        "rules": [
+            "ENERGY.Voltage",
+            "ENERGY.Current",
+            "ENERGY.Power",
+            "ENERGY.Today",
+            "ENERGY.Yesterday",
+            "ENERGY.Total",
+            "SI7020.Temperature",
+            "SI7020.Humidity",
+            "SI7020.DewPoint"
+        ],
+        "outputTopic": "ISHP",
+        "x": 340,
+        "y": 640,
+        "wires": [
+            [
+                "1956685d.c04108",
+                "2f3696cf.1f09f2"
+            ],
+            [
+                "4c15119b.d889b8"
+            ],
+            [
+                "41b659ae.5c3038",
+                "892d7fd5.b9deb"
+            ],
+            [
+                "d890e238.87c73",
+                "ebc1cde9.c0ff"
+            ],
+            [
+                "bdc462b7.1df72",
+                "c5344593d0096dac"
+            ],
+            [
+                "80f591e0.f9bbe8"
+            ],
+            [
+                "41567a72.fc94ec"
+            ],
+            [
+                "7e0e6481.4c01fc"
+            ],
+            [
+                "a9844ae5.0adfc8"
+            ]
+        ]
+    },
+    {
+        "id": "41567a72.fc94ec",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "d": true,
+        "group": "29ad59d4.74162e",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Temp",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 730,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "7e0e6481.4c01fc",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "d": true,
+        "group": "29ad59d4.74162e",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Humidity",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 740,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "a9844ae5.0adfc8",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "d": true,
+        "group": "29ad59d4.74162e",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Dew Point",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 750,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "1956685d.c04108",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Volts",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 730,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "2f3696cf.1f09f2",
+        "type": "link out",
+        "z": "b63f705d.be3218",
+        "name": "AC_Volts",
+        "mode": "link",
+        "links": [
+            "497b39f3.65a598",
+            "e137551d.7ec82"
+        ],
+        "x": 355,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "4c15119b.d889b8",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Current",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 740,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "41b659ae.5c3038",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "True Power",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 750,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "d890e238.87c73",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Energy Today",
+        "format": "{{msg.payload | number:3}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 760,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "bdc462b7.1df72",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Energy Yesterday",
+        "format": "{{msg.payload | number:3}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 770,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "80f591e0.f9bbe8",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 6,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Energy Total",
+        "format": "{{msg.payload | number:3}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 750,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "8a4f14fa.050148",
+        "type": "ui_level",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 10,
+        "width": "2",
+        "height": "3",
+        "name": "Sys Volts",
+        "label": "Volts",
+        "colorHi": "#e60000",
+        "colorWarn": "#ff9900",
+        "colorNormal": "#00b33c",
+        "colorOff": "#595959",
+        "min": "240",
+        "max": "260",
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "volts",
+        "layout": "sv",
+        "channelA": "",
+        "channelB": "",
+        "decimals": 0,
+        "animations": "soft",
+        "shape": "1",
+        "colorschema": "fixed",
+        "textoptions": "custom",
+        "colorText": "#eeeeee",
+        "fontLabel": "0.65",
+        "fontValue": "0.75",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "auto",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": "10000",
+        "x": 640,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "29806102.d8632e",
+        "type": "ui_level",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 11,
+        "width": "2",
+        "height": "3",
+        "name": "Gas Temp",
+        "label": "Gas",
+        "colorHi": "#e60000",
+        "colorWarn": "#00b33c",
+        "colorNormal": "#00b33c",
+        "colorOff": "#595959",
+        "min": "40",
+        "max": 100,
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "F°",
+        "layout": "sv",
+        "channelA": "",
+        "channelB": "",
+        "decimals": "1",
+        "animations": "soft",
+        "shape": "1",
+        "colorschema": "valuedriven",
+        "textoptions": "custom",
+        "colorText": "#eeeeee",
+        "fontLabel": "0.65",
+        "fontValue": ".75",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "auto",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": "infinity",
+        "x": 650,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "7b491c9d.8947ec",
+        "type": "emoncms in",
+        "z": "b63f705d.be3218",
+        "name": "Emoncms",
+        "emonServer": "a2df0269.797588",
+        "feedid": "47",
+        "x": 300,
+        "y": 960,
+        "wires": [
+            [
+                "29806102.d8632e"
+            ]
+        ]
+    },
+    {
+        "id": "eaf57488.7265f8",
+        "type": "inject",
+        "z": "b63f705d.be3218",
+        "name": "10 sec",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 960,
+        "wires": [
+            [
+                "7b491c9d.8947ec",
+                "50318277.08c0ac",
+                "f037df37.cf4c5"
+            ]
+        ]
+    },
+    {
+        "id": "50318277.08c0ac",
+        "type": "emoncms in",
+        "z": "b63f705d.be3218",
+        "name": "Emoncms",
+        "emonServer": "a2df0269.797588",
+        "feedid": "48",
+        "x": 300,
+        "y": 1020,
+        "wires": [
+            [
+                "8028c02b.a483f8"
+            ]
+        ]
+    },
+    {
+        "id": "f037df37.cf4c5",
+        "type": "emoncms in",
+        "z": "b63f705d.be3218",
+        "name": "Emoncms",
+        "emonServer": "a2df0269.797588",
+        "feedid": "49",
+        "x": 300,
+        "y": 1080,
+        "wires": [
+            [
+                "d34295f4.b61db"
+            ]
+        ]
+    },
+    {
+        "id": "8028c02b.a483f8",
+        "type": "ui_level",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 12,
+        "width": "2",
+        "height": "3",
+        "name": "Liquid Temp",
+        "label": "Liquid",
+        "colorHi": "#e60000",
+        "colorWarn": "#00b33c",
+        "colorNormal": "#00b33c",
+        "colorOff": "#595959",
+        "min": "40",
+        "max": 100,
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "F°",
+        "layout": "sv",
+        "channelA": "",
+        "channelB": "",
+        "decimals": "1",
+        "animations": "soft",
+        "shape": "1",
+        "colorschema": "valuedriven",
+        "textoptions": "custom",
+        "colorText": "#eeeeee",
+        "fontLabel": ".65",
+        "fontValue": ".75",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "auto",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": "infinity",
+        "x": 650,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "d34295f4.b61db",
+        "type": "bitunloader",
+        "z": "b63f705d.be3218",
+        "name": "stat",
+        "mode": "string",
+        "prop": "payload",
+        "padding": "8",
+        "x": 110,
+        "y": 1200,
+        "wires": [
+            [
+                "58c35e18.3356a8"
+            ]
+        ]
+    },
+    {
+        "id": "58c35e18.3356a8",
+        "type": "split",
+        "z": "b63f705d.be3218",
+        "name": "",
+        "splt": "1",
+        "spltType": "len",
+        "arraySplt": "1",
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 230,
+        "y": 1200,
+        "wires": [
+            [
+                "df2b83b5.79f85"
+            ]
+        ]
+    },
+    {
+        "id": "df2b83b5.79f85",
+        "type": "switch",
+        "z": "b63f705d.be3218",
+        "name": "",
+        "property": "parts.index",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "4",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "5",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "6",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "7",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 8,
+        "x": 370,
+        "y": 1200,
+        "wires": [
+            [],
+            [],
+            [],
+            [],
+            [
+                "d0a8249a.b915b"
+            ],
+            [
+                "9630bd53.2d4a4"
+            ],
+            [
+                "769a44a5.bcfc94"
+            ],
+            [
+                "411cb56a.c2a8b4"
+            ]
+        ]
+    },
+    {
+        "id": "68b278be.14c5",
+        "type": "comment",
+        "z": "b63f705d.be3218",
+        "name": "Link to config info",
+        "info": "https://discourse.nodered.org/t/split-to-different-outputs/5773",
+        "x": 270,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "892d7fd5.b9deb",
+        "type": "function",
+        "z": "b63f705d.be3218",
+        "name": "Power_sum",
+        "func": "context.data = context.data || {};\nswitch (msg.topic){\n    case \"ISHP\":\n        context.data.ISHP = msg.payload;\n        msg = null;\n        break;\n    case \"OSHP\":\n        context.data.OSHP = msg.payload;\n        msg = null;\n        break;\n    default:\n        msg = null;\n        break;\n}\n\nif(context.data.ISHP != null && context.data.OSHP != null ){\n    var sum = context.data.ISHP + context.data.OSHP;\n    context.data = null;\n    return{payload:sum};\n}\nelse return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 300,
+        "wires": [
+            [
+                "f9897943.0844b"
+            ]
+        ]
+    },
+    {
+        "id": "f9897943.0844b",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "c424609e.ee0a5",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "HVAC Power",
+        "label": "HVAC Power",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 730,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "497b39f3.65a598",
+        "type": "link in",
+        "z": "b63f705d.be3218",
+        "name": "",
+        "links": [
+            "2f3696cf.1f09f2"
+        ],
+        "x": 475,
+        "y": 900,
+        "wires": [
+            [
+                "8a4f14fa.050148"
+            ]
+        ]
+    },
+    {
+        "id": "411cb56a.c2a8b4",
+        "type": "function",
+        "z": "b63f705d.be3218",
+        "name": "",
+        "func": "if (msg.payload == '0') \n   {msg.payload = 'Heat'}\nelse \n   {msg.payload = 'Cool'}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 600,
+        "y": 1340,
+        "wires": [
+            [
+                "42e9e4ed.f2454c"
+            ]
+        ]
+    },
+    {
+        "id": "ebc1cde9.c0ff",
+        "type": "function",
+        "z": "b63f705d.be3218",
+        "name": "kWH Today",
+        "func": "context.data = context.data || {};\nswitch (msg.topic){\n    case \"ISHP\":\n        context.data.ISHP = msg.payload;\n        msg = null;\n        break;\n    case \"OSHP\":\n        context.data.OSHP = msg.payload;\n        msg = null;\n        break;\n    default:\n        msg = null;\n        break;\n}\n\nif(context.data.ISHP != null && context.data.OSHP != null ){\n    var sum = context.data.ISHP + context.data.OSHP;\n    context.data = null;\n    return{payload:sum};\n}\nelse return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 340,
+        "wires": [
+            [
+                "c6e913fe.b6eb1",
+                "ee95ee3d826971b4"
+            ]
+        ]
+    },
+    {
+        "id": "c6e913fe.b6eb1",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "c424609e.ee0a5",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "kWh today",
+        "format": "{{msg.payload|number:3}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 730,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "42e9e4ed.f2454c",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 13,
+        "width": 0,
+        "height": 0,
+        "name": "Mode",
+        "label": "Mode",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 790,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "d0a8249a.b915b",
+        "type": "function",
+        "z": "b63f705d.be3218",
+        "name": "",
+        "func": "if (msg.payload == '0') \n   {msg.payload = 'Off'}\nelse \n   {msg.payload = 'On'}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 1220,
+        "wires": [
+            [
+                "4ab34e26.b41a88"
+            ]
+        ]
+    },
+    {
+        "id": "9630bd53.2d4a4",
+        "type": "function",
+        "z": "b63f705d.be3218",
+        "name": "",
+        "func": "if (msg.payload == '0') \n   {msg.payload = 'Off'}\nelse \n   {msg.payload = 'Run'}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 600,
+        "y": 1260,
+        "wires": [
+            [
+                "e94e138e.9e5f4"
+            ]
+        ]
+    },
+    {
+        "id": "769a44a5.bcfc94",
+        "type": "function",
+        "z": "b63f705d.be3218",
+        "name": "",
+        "func": "if (msg.payload == '0') \n   {msg.payload = 'Off'}\nelse \n   {msg.payload = 'Run'}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 600,
+        "y": 1300,
+        "wires": [
+            [
+                "e675d171.09e718"
+            ]
+        ]
+    },
+    {
+        "id": "e675d171.09e718",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 14,
+        "width": 0,
+        "height": 0,
+        "name": "Fan",
+        "label": "Fan",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 790,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "e94e138e.9e5f4",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 15,
+        "width": 0,
+        "height": 0,
+        "name": "Compressor",
+        "label": "Compressor",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 810,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "4ab34e26.b41a88",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "29ad59d4.74162e",
+        "order": 16,
+        "width": 0,
+        "height": 0,
+        "name": "Emergency Heat",
+        "label": "Emergency Heat",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 830,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "c5344593d0096dac",
+        "type": "function",
+        "z": "b63f705d.be3218",
+        "name": "KWH Yesterday",
+        "func": "context.data = context.data || {};\nswitch (msg.topic) {\n    case \"ISHP\":\n        context.data.ISHP = msg.payload;\n        msg = null;\n        break;\n    case \"OSHP\":\n        context.data.OSHP = msg.payload;\n        msg = null;\n        break;\n    default:\n        msg = null;\n        break;\n}\n\nif (context.data.ISHP != null && context.data.OSHP != null) {\n    var sum = context.data.ISHP + context.data.OSHP;\n    context.data = null;\n    return { payload: sum };\n}\nelse return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 460,
+        "wires": [
+            [
+                "6580563f35bef141",
+                "1cee01f023c01e8c"
+            ]
+        ]
+    },
+    {
+        "id": "6580563f35bef141",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "c424609e.ee0a5",
+        "order": 16,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "KWH Yesterday",
+        "format": "{{msg.payload | number:3}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 760,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "8d992655ea915f30",
+        "type": "comment",
+        "z": "b63f705d.be3218",
+        "name": "Heat Pump Cost",
+        "info": ".16613 * kwh",
+        "x": 320,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "ee95ee3d826971b4",
+        "type": "function",
+        "z": "b63f705d.be3218",
+        "name": "Cost Today ",
+        "func": "var cost = msg.payload * 0.16137;\nmsg.payload = cost;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 380,
+        "wires": [
+            [
+                "e867a7a2d5f79005"
+            ]
+        ]
+    },
+    {
+        "id": "1cee01f023c01e8c",
+        "type": "function",
+        "z": "b63f705d.be3218",
+        "name": "Cost Yesterday",
+        "func": "var cost = msg.payload * 0.16137;\nmsg.payload = cost;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 420,
+        "wires": [
+            [
+                "20317c5b710e589c"
+            ]
+        ]
+    },
+    {
+        "id": "e867a7a2d5f79005",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "c424609e.ee0a5",
+        "order": 9,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Cost Today",
+        "format": "{{msg.payload|number:2}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 730,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "20317c5b710e589c",
+        "type": "ui_text",
+        "z": "b63f705d.be3218",
+        "group": "c424609e.ee0a5",
+        "order": 10,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Cost Yesterday",
+        "format": "{{msg.payload|number:2}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 740,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "c424609e.ee0a5",
+        "type": "ui_group",
+        "name": "Outside HP",
+        "tab": "571a83b7.ef4684",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "1f697ae0.735f35",
+        "type": "tasmota-mqtt-broker",
+        "name": "pi32131",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "keepalive": "60",
+        "cleansession": true
+    },
+    {
+        "id": "29ad59d4.74162e",
+        "type": "ui_group",
+        "name": "Inside HP",
+        "tab": "571a83b7.ef4684",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "a2df0269.797588",
+        "type": "emoncms-server",
+        "server": "http://192.168.1.29/emoncms",
+        "name": "emon"
+    },
+    {
+        "id": "571a83b7.ef4684",
+        "type": "ui_tab",
+        "name": "Heat Pump",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
