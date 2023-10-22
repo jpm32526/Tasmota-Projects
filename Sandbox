@@ -1,0 +1,496 @@
+[
+    {
+        "id": "d98612332bc7a1bf",
+        "type": "tab",
+        "label": "Sandbox",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "258e72689809a8c6",
+        "type": "function",
+        "z": "d98612332bc7a1bf",
+        "name": "Push Button",
+        "func": "var state = context.get(\"STATE\")||0;\n\n//  Look for a !X message to get values.\nif (msg.payload != \"X\")     //Do this if the message is NOT \"X\"\n{\n    //\n    //  Background colours first.\n    //\n    context.set(\"ABGC\", msg.colourA);\n    context.set(\"BBGC\", msg.colourB);\n    //\n    //  Now do text.\n    //\n    context.set(\"Atxt\", msg.txtA);\n    context.set(\"Btxt\", msg.txtB);\n    //\n    //  Font colours.\n    //\n    context.set(\"AFC\",msg.txtclrA);\n    context.set(\"BFC\",msg.txtclrB);\n    //\n    //  Payloads.\n    //\n    context.set(\"PayloadA\", msg.payloadA);\n    context.set(\"PayloadB\", msg.payloadB);\n    //\n    //  Topic.\n    //\n    if (msg.topicSET !== null)\n    {\n        context.set(\"Topic\",msg.topicSET);\n    } else\n    {\n        context.set(\"Topic\",\"~\");\n    }\n    return;\n}\n//      Now on to the real stuff.\nif (msg.payload == \"X\")\n{\n    state = (state + 1)% 2;\n    //node.warn(state);\n    context.set(\"STATE\",state);\n}\nif (state === 0)\n{\n    //  Condition A\n    msg.payload = context.get(\"PayloadA\");\n    msg.colour = context.get(\"ABGC\");\n    msg.txt = context.get(\"Atxt\");\n    msg.fontclr = context.get(\"AFC\");\n} else\n{\n    //  Condition B\n    msg.payload = context.get(\"PayloadB\");\n    msg.colour = context.get(\"BBGC\");\n    msg.txt = context.get(\"Btxt\");\n    msg.fontclr = context.get(\"BFC\");\n}\nif (context.get(\"Topic\") == \"~\")\n{\n    msg.topic = \"\";\n} else\n{\n    msg.topic = context.get(\"Topic\");\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 460,
+        "wires": [
+            [
+                "c3e50f4706902763"
+            ]
+        ]
+    },
+    {
+        "id": "c3e50f4706902763",
+        "type": "ui_button",
+        "z": "d98612332bc7a1bf",
+        "name": "RBE Button",
+        "group": "396240c9.2d409",
+        "order": 5,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "{{msg.txt}}",
+        "tooltip": "",
+        "color": "{{msg.fontclr}}",
+        "bgcolor": "{{msg.colour}}",
+        "className": "",
+        "icon": "",
+        "payload": "X",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 470,
+        "y": 390,
+        "wires": [
+            [
+                "258e72689809a8c6"
+            ]
+        ]
+    },
+    {
+        "id": "c816c23b591460b7",
+        "type": "inject",
+        "z": "d98612332bc7a1bf",
+        "name": "Setup",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 450,
+        "y": 300,
+        "wires": [
+            [
+                "c3e50f4706902763"
+            ]
+        ]
+    },
+    {
+        "id": "002f10f0de55b5d8",
+        "type": "comment",
+        "z": "d98612332bc7a1bf",
+        "name": "Push Button Flow",
+        "info": "This has two states:\nA and B.\nAll future refrence is to these two state names.\n\nREQUIRED:\nInputs:\nButton background colour for state A.  msg.colurA\nButton background colour for state B.  msg.colourB\nButton text for state A.               msg.txtA\nButton text for state B.               msg.txtB\nFont colour for state A.               msg.txtclrA\nFont colour for state B.               msg.txtclrB\nPayload for state A.                   msg.payloadA\nPayload for state B.                   msg.payloadB\nTopic.                                 msg.topicSET\n\nOutputs:\nmsg.payload - this is used to control what ever you need.\nmsg.topic - this is if it is needed for control of the next node.\nmsg.colour - this sets the colour of the button.\nmsg.txt - this is the text to be displayed in the button.\nmsg.fontclr - this is the colour of the text on the button.\n",
+        "x": 450,
+        "y": 250,
+        "wires": []
+    },
+    {
+        "id": "ce8c5500.7efa38",
+        "type": "comment",
+        "z": "d98612332bc7a1bf",
+        "name": "Doors",
+        "info": "Options:\n1 - Normal\n2 - Busy\n3 - Coded entry\n4 - One Time Open\n5 - DND",
+        "x": 390,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "1237ece.991ee13",
+        "type": "ui_template",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "name": "Normal",
+        "order": 13,
+        "width": "2",
+        "height": "1",
+        "format": "\n<md-button class=\"vibrate filled touched smallfont rounded\" style=\"background-color:#16a085\"   ng-click=\"send({payload: 'NORMAL'})\"> \n    Normal\n</md-button> \n\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 260,
+        "y": 630,
+        "wires": [
+            [
+                "178879f0.b2a8de"
+            ]
+        ]
+    },
+    {
+        "id": "3389e57a.d4a60a",
+        "type": "ui_template",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "name": "Busy",
+        "order": 15,
+        "width": "2",
+        "height": "1",
+        "format": "\n<md-button class=\"vibrate filled touched smallfont rounded\" style=\"background-color:#c0392b\" ng-click=\"send({payload: 'BUSY'})\"> \n    Busy\n</md-button> \n\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 250,
+        "y": 670,
+        "wires": [
+            [
+                "178879f0.b2a8de"
+            ]
+        ]
+    },
+    {
+        "id": "9c78d4b3.75d998",
+        "type": "ui_template",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "name": "One Time Open",
+        "order": 17,
+        "width": "2",
+        "height": "1",
+        "format": "\n<md-button class=\"vibrate filled touched smallfont rounded\" style=\"background-color:#e67e22\"   ng-click=\"send({payload: 'OTO'})\"> \n    One<br/>Time<br/>Open\n</md-button> \n\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 280,
+        "y": 710,
+        "wires": [
+            [
+                "178879f0.b2a8de"
+            ]
+        ]
+    },
+    {
+        "id": "a47fc7c4.86d898",
+        "type": "ui_template",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "name": "Coded entry",
+        "order": 19,
+        "width": "2",
+        "height": "1",
+        "format": "\n<md-button class=\"vibrate filled touched smallfont rounded\" style=\"background-color:#c0392b\" ng-click=\"send({payload: 'CODED'})\"> \n    Coded<br/>Entry\n</md-button> \n\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 270,
+        "y": 750,
+        "wires": [
+            [
+                "178879f0.b2a8de"
+            ]
+        ]
+    },
+    {
+        "id": "5f58bab9.17a784",
+        "type": "ui_template",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "name": "",
+        "order": 21,
+        "width": "2",
+        "height": "1",
+        "format": "\n<md-button class=\"vibrate filled touched smallfont rounded\" style=\"background-color:#16a085\"   ng-click=\"send({payload: 'Hello World'})\"> \n    Blue<br/>button\n</md-button> \n\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 260,
+        "y": 790,
+        "wires": [
+            [
+                "178879f0.b2a8de"
+            ]
+        ]
+    },
+    {
+        "id": "1af4c451.8fdce4",
+        "type": "ui_template",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "name": "DND",
+        "order": 23,
+        "width": "2",
+        "height": "1",
+        "format": "\n<md-button class=\"vibrate filled touched smallfont rounded\" style=\"background-color:#c0392b\" ng-click=\"send({payload: 'DND'})\"> \n    DND\n</md-button> \n\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 250,
+        "y": 830,
+        "wires": [
+            [
+                "178879f0.b2a8de"
+            ]
+        ]
+    },
+    {
+        "id": "56848319.f9270c",
+        "type": "ui_text",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "order": 14,
+        "width": "1",
+        "height": "1",
+        "name": "LED n",
+        "label": "",
+        "format": "<font color={{msg.payload}} ><i class=\"fa fa-circle\" style=\"font-size:24px;\"></i></font>",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 790,
+        "y": 630,
+        "wires": []
+    },
+    {
+        "id": "232677ad.11dfb",
+        "type": "ui_text",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "order": 16,
+        "width": "1",
+        "height": "1",
+        "name": "LED b",
+        "label": "",
+        "format": "<font color={{msg.payload}} ><i class=\"fa fa-circle\" style=\"font-size:24px;\"></i></font>",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 790,
+        "y": 670,
+        "wires": []
+    },
+    {
+        "id": "594cd775.0a8a3",
+        "type": "ui_text",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "order": 20,
+        "width": "1",
+        "height": "1",
+        "name": "LED c",
+        "label": "",
+        "format": "<font color={{msg.payload}} ><i class=\"fa fa-circle\" style=\"font-size:24px;\"></i></font>",
+        "layout": "col-center",
+        "x": 790,
+        "y": 750,
+        "wires": []
+    },
+    {
+        "id": "8c67fd12.cd4d",
+        "type": "ui_text",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "order": 18,
+        "width": "1",
+        "height": "1",
+        "name": "LED o",
+        "label": "",
+        "format": "<font color={{msg.payload}} ><i class=\"fa fa-circle\" style=\"font-size:24px;\"></i></font>",
+        "layout": "col-center",
+        "x": 790,
+        "y": 710,
+        "wires": []
+    },
+    {
+        "id": "7095262a.bdc78",
+        "type": "ui_text",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "order": 22,
+        "width": "1",
+        "height": "1",
+        "name": "LED",
+        "label": "",
+        "format": "<font color={{msg.payload}} ><i class=\"fa fa-circle\" style=\"font-size:24px;\"></i></font>",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 790,
+        "y": 790,
+        "wires": []
+    },
+    {
+        "id": "79207d7e.f0ee54",
+        "type": "ui_text",
+        "z": "d98612332bc7a1bf",
+        "group": "3ed40c4d.7ae17c",
+        "order": 24,
+        "width": "1",
+        "height": "1",
+        "name": "LED d",
+        "label": "",
+        "format": "<font color={{msg.payload}} ><i class=\"fa fa-circle\" style=\"font-size:24px;\"></i></font>",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 790,
+        "y": 830,
+        "wires": []
+    },
+    {
+        "id": "ff5b290f.b7a5a8",
+        "type": "comment",
+        "z": "d98612332bc7a1bf",
+        "name": "My",
+        "info": "Options:\n1 - Normal\n2 - Busy\n3 - Coded entry\n4 - One Time Open\n5 - DND",
+        "x": 260,
+        "y": 590,
+        "wires": []
+    },
+    {
+        "id": "178879f0.b2a8de",
+        "type": "function",
+        "z": "d98612332bc7a1bf",
+        "name": "",
+        "func": "//  Set LEDs depending on which button is pressed.\n//  1 input, 7 outputs.\n//  Outputs 1 - 6 are for LED.  Output 7 = function output.\n//  Send 'xx' to turn off all LEDs.\nvar mode = msg.payload;\nvar on = \"lime\";\nvar off = \"red\";\nnode.status({fill:\"yellow\",shape:\"dot\",text:mode});\nif (mode == \"NORMAL\")\n{\n    //  Normal button pressed\n    var msg7 = {payload:mode};\n    var msg1 = {payload:on};\n    var msg2 = {payload:off};\n    var msg3 = {payload:off};\n    var msg4 = {payload:off};\n    var msg5 = {payload:off};\n    var msg6 = {payload:off};\n}else\nif (mode == \"BUSY\")\n{\n    //  Busy button pressed\n    var msg7 = {payload:mode};\n    var msg1 = {payload:off};\n    var msg2 = {payload:on};\n    var msg3 = {payload:off};\n    var msg4 = {payload:off};\n    var msg5 = {payload:off};\n    var msg6 = {payload:off};\n}else\nif (mode == \"OTO\")\n{\n    // OTO button pressed\n    var msg7 = {payload:mode};\n    var msg1 = {payload:off};\n    var msg2 = {payload:off};\n    var msg3 = {payload:on};\n    var msg4 = {payload:off};\n    var msg5 = {payload:off};\n    var msg6 = {payload:off};\n}else\nif (mode == \"CODED\")\n{\n    //  Coded Entry button pressed\n    var msg7 = {payload:mode};\n    var msg1 = {payload:off};\n    var msg2 = {payload:off};\n    var msg3 = {payload:off};\n    var msg4 = {payload:on};\n    var msg5 = {payload:off};\n    var msg6 = {payload:off};\n}else\nif (mode == \"zz\")\n{\n    //\tFor now not used./////////////////////////////\n    var msg7 = {payload:mode};\n    var msg1 = {payload:off};\n    var msg2 = {payload:off};\n    var msg3 = {payload:off};\n    var msg4 = {payload:off};\n    var msg5 = {payload:on};\n    var msg6 = {payload:off};\n}else\nif (mode == \"DND\")\n{\n    //  DND button pressed\n    var msg7 = {payload:mode};\n    var msg1 = {payload:off};\n    var msg2 = {payload:off};\n    var msg3 = {payload:off};\n    var msg4 = {payload:off};\n    var msg5 = {payload:off};\n    var msg6 = {payload:on};\n}\nif (mode == \"xx\")\n{\n    //  DND button pressed\n    var msg7 = {payload:mode};\n    var msg1 = {payload:off};\n    var msg2 = {payload:off};\n    var msg3 = {payload:off};\n    var msg4 = {payload:off};\n    var msg5 = {payload:off};\n    var msg6 = {payload:off};\n}\nreturn [msg1, msg2, msg3, msg4, msg5, msg6, msg7];\n",
+        "outputs": 7,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 680,
+        "wires": [
+            [
+                "56848319.f9270c"
+            ],
+            [
+                "232677ad.11dfb"
+            ],
+            [
+                "8c67fd12.cd4d"
+            ],
+            [
+                "594cd775.0a8a3"
+            ],
+            [
+                "7095262a.bdc78"
+            ],
+            [
+                "79207d7e.f0ee54"
+            ],
+            [
+                "a7c9e7ef.820cb8"
+            ]
+        ]
+    },
+    {
+        "id": "2ee46fc7.3431a",
+        "type": "comment",
+        "z": "d98612332bc7a1bf",
+        "name": "LED indicators",
+        "info": "msg.payload = colour",
+        "x": 790,
+        "y": 590,
+        "wires": []
+    },
+    {
+        "id": "a7c9e7ef.820cb8",
+        "type": "debug",
+        "z": "d98612332bc7a1bf",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 810,
+        "y": 870,
+        "wires": []
+    },
+    {
+        "id": "a6971d5c.56445",
+        "type": "inject",
+        "z": "d98612332bc7a1bf",
+        "name": "Set default",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "NORMAL",
+        "payloadType": "str",
+        "x": 410,
+        "y": 590,
+        "wires": [
+            [
+                "178879f0.b2a8de"
+            ]
+        ]
+    },
+    {
+        "id": "396240c9.2d409",
+        "type": "ui_group",
+        "name": "WAP",
+        "tab": "d54cd82e.537658",
+        "order": 3,
+        "disp": true,
+        "width": "4",
+        "collapse": false
+    },
+    {
+        "id": "3ed40c4d.7ae17c",
+        "type": "ui_group",
+        "name": "MyDoor_Notification_Status",
+        "tab": "d5237612.7a909",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "d54cd82e.537658",
+        "type": "ui_tab",
+        "name": "Logging",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d5237612.7a909",
+        "type": "ui_tab",
+        "name": "Button Control",
+        "icon": "dashboard",
+        "order": 11
+    }
+]
