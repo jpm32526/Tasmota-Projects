@@ -1,0 +1,2751 @@
+[
+    {
+        "id": "b1f137bc1cc172fb",
+        "type": "tab",
+        "label": "Outhouse",
+        "disabled": false,
+        "info": "Devices contained within the Storage Building.",
+        "env": []
+    },
+    {
+        "id": "1cb31ae565106b12",
+        "type": "junction",
+        "z": "b1f137bc1cc172fb",
+        "x": 280,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "71d4ad623ff5e4ce",
+        "type": "junction",
+        "z": "b1f137bc1cc172fb",
+        "x": 280,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "24bee3898d13edc8",
+        "type": "mqtt in",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "topic": "tele/Box2/SENSOR",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 680,
+        "wires": [
+            [
+                "7e9cfc41f817892e",
+                "eb11dc60e5b9d1ae",
+                "c1c1ebafb6b0aadb"
+            ]
+        ]
+    },
+    {
+        "id": "7e9cfc41f817892e",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.DS18B20.Temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 620,
+        "wires": [
+            [
+                "c94fceee3421fa1b"
+            ]
+        ]
+    },
+    {
+        "id": "c94fceee3421fa1b",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "1ddd0099426c5847",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "name": "Soil Temp",
+        "label": "Soil Temp",
+        "format": "{{value | number:1}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 700,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "eb11dc60e5b9d1ae",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.HTU21.Temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 660,
+        "wires": [
+            [
+                "4fe28001f7fa2c02",
+                "3b735f6c43dadd2f"
+            ]
+        ]
+    },
+    {
+        "id": "c1c1ebafb6b0aadb",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.HTU21.Humidity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 740,
+        "wires": [
+            [
+                "8a9dd3e2c77fae10"
+            ]
+        ]
+    },
+    {
+        "id": "4fe28001f7fa2c02",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "1ddd0099426c5847",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "AirTemp",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 700,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "8a9dd3e2c77fae10",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "1ddd0099426c5847",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "Air Rh",
+        "label": "Air Rh",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 690,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "3b735f6c43dadd2f",
+        "type": "ui_chart",
+        "z": "b1f137bc1cc172fb",
+        "name": "Air Temp",
+        "group": "1ddd0099426c5847",
+        "order": 1,
+        "width": "6",
+        "height": "4",
+        "label": "Air Temp",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "70",
+        "ymax": "90",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 700,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7016e68f1dcb65a1",
+        "type": "mqtt in",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "topic": "tele/Box1/SENSOR",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "6fa06bf3f1d806f7",
+                "1cbc13715f477979",
+                "8d0bd56f3aacafd7"
+            ]
+        ]
+    },
+    {
+        "id": "8d0bd56f3aacafd7",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.DS18B20.Temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 40,
+        "wires": [
+            [
+                "5d5e62a5a42fc5eb"
+            ]
+        ]
+    },
+    {
+        "id": "1cbc13715f477979",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.HTU21.Temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 80,
+        "wires": [
+            [
+                "3b97f1c11f65ea5e",
+                "245cb4453294d786"
+            ]
+        ]
+    },
+    {
+        "id": "6fa06bf3f1d806f7",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.HTU21.Humidity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 160,
+        "wires": [
+            [
+                "2f8b0d3a52227b95"
+            ]
+        ]
+    },
+    {
+        "id": "5d5e62a5a42fc5eb",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "170680becd8f6f25",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Soil Temp",
+        "format": "{{value | number:1}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 700,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "3b97f1c11f65ea5e",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "170680becd8f6f25",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Air Temp",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 700,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "245cb4453294d786",
+        "type": "ui_chart",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "170680becd8f6f25",
+        "order": 1,
+        "width": "6",
+        "height": "4",
+        "label": "Air Temp",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "70",
+        "ymax": "90",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 700,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2f8b0d3a52227b95",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "170680becd8f6f25",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "Air Rh",
+        "label": "Air Rh",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 690,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "7664c18b7d19b6e8",
+        "type": "mqtt in",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "topic": "stat/Box1/RESULT",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 280,
+        "wires": [
+            [
+                "23c2f9a4d21aea04",
+                "4e37ce89b1fb2527",
+                "d40d82e6d9ce5a3a",
+                "d75044a3bf2f453b"
+            ]
+        ]
+    },
+    {
+        "id": "f252bdbe7a360765",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 4,
+        "group": "170680becd8f6f25",
+        "width": "4",
+        "height": "1",
+        "label": "Light",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "115a9060bccf73a4",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 5,
+        "group": "170680becd8f6f25",
+        "width": "4",
+        "height": "1",
+        "label": "Ex Fan",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ba67ee7f184d98e6",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 5,
+        "group": "170680becd8f6f25",
+        "width": "4",
+        "height": "1",
+        "label": "Circ Fan",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "4215786a9338785b",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 6,
+        "group": "170680becd8f6f25",
+        "width": "4",
+        "height": "1",
+        "label": "Spare",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "23c2f9a4d21aea04",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 220,
+        "wires": [
+            [
+                "f252bdbe7a360765"
+            ]
+        ]
+    },
+    {
+        "id": "4e37ce89b1fb2527",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER2",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "115a9060bccf73a4"
+            ]
+        ]
+    },
+    {
+        "id": "d40d82e6d9ce5a3a",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 300,
+        "wires": [
+            [
+                "ba67ee7f184d98e6"
+            ]
+        ]
+    },
+    {
+        "id": "d75044a3bf2f453b",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER4",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 340,
+        "wires": [
+            [
+                "4215786a9338785b"
+            ]
+        ]
+    },
+    {
+        "id": "abe580623bc08059",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 4,
+        "group": "1ddd0099426c5847",
+        "width": "4",
+        "height": "1",
+        "label": "Light",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "adf6baf61d650c59",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 5,
+        "group": "1ddd0099426c5847",
+        "width": "4",
+        "height": "1",
+        "label": "Ex Fan",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "48b1c19d682c3e95",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 5,
+        "group": "1ddd0099426c5847",
+        "width": "4",
+        "height": "1",
+        "label": "Circ Fan",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "4860debe3cfcf418",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 6,
+        "group": "1ddd0099426c5847",
+        "width": "4",
+        "height": "1",
+        "label": "Spare",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "9ee0491edafe9d9e",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 800,
+        "wires": [
+            [
+                "abe580623bc08059"
+            ]
+        ]
+    },
+    {
+        "id": "8489dd8dad2866df",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER2",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 840,
+        "wires": [
+            [
+                "adf6baf61d650c59"
+            ]
+        ]
+    },
+    {
+        "id": "258c39561799cdfa",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 880,
+        "wires": [
+            [
+                "48b1c19d682c3e95"
+            ]
+        ]
+    },
+    {
+        "id": "42f6735a6f7749ba",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER4",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 920,
+        "wires": [
+            [
+                "4860debe3cfcf418"
+            ]
+        ]
+    },
+    {
+        "id": "20e1710c2c4d0606",
+        "type": "mqtt in",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "topic": "stat/Box2/RESULT",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 860,
+        "wires": [
+            [
+                "9ee0491edafe9d9e",
+                "8489dd8dad2866df",
+                "258c39561799cdfa",
+                "42f6735a6f7749ba"
+            ]
+        ]
+    },
+    {
+        "id": "0fa0c4c613d26e06",
+        "type": "mqtt in",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "topic": "tele/Box3A/SENSOR",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 1260,
+        "wires": [
+            [
+                "64e2a546c5e52431",
+                "380fbf69f9fdcdf7",
+                "f8d9015f38361138"
+            ]
+        ]
+    },
+    {
+        "id": "64e2a546c5e52431",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.DS18B20.Temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1200,
+        "wires": [
+            [
+                "77d0a7b73ac9a74f"
+            ]
+        ]
+    },
+    {
+        "id": "77d0a7b73ac9a74f",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "9599a10ac3c34a6e",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "name": "Soil Temp",
+        "label": "Soil Temp",
+        "format": "{{value | number:1}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 700,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "380fbf69f9fdcdf7",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.HTU21.Temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1240,
+        "wires": [
+            [
+                "86f011a40816a551",
+                "14360645c9fb858c"
+            ]
+        ]
+    },
+    {
+        "id": "f8d9015f38361138",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.HTU21.Humidity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1320,
+        "wires": [
+            [
+                "4ffdfc4535850cb9"
+            ]
+        ]
+    },
+    {
+        "id": "86f011a40816a551",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "9599a10ac3c34a6e",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "AirTemp",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 700,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "4ffdfc4535850cb9",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "9599a10ac3c34a6e",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "Air Rh",
+        "label": "Air Rh",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 690,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "14360645c9fb858c",
+        "type": "ui_chart",
+        "z": "b1f137bc1cc172fb",
+        "name": "Air Temp",
+        "group": "9599a10ac3c34a6e",
+        "order": 1,
+        "width": "6",
+        "height": "4",
+        "label": "Air Temp",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "70",
+        "ymax": "90",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 700,
+        "y": 1280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e6339de40e77b3a6",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 4,
+        "group": "9599a10ac3c34a6e",
+        "width": "4",
+        "height": "1",
+        "label": "Light",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "e85807c978ec59b0",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 5,
+        "group": "9599a10ac3c34a6e",
+        "width": "4",
+        "height": "1",
+        "label": "Ex Fan",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "0650655988c80eda",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 5,
+        "group": "9599a10ac3c34a6e",
+        "width": "4",
+        "height": "1",
+        "label": "Circ Fan",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "6e080a1c996ed6f6",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 6,
+        "group": "9599a10ac3c34a6e",
+        "width": "4",
+        "height": "1",
+        "label": "Spare",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "c5df7cd0fea2d254",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1380,
+        "wires": [
+            [
+                "e6339de40e77b3a6"
+            ]
+        ]
+    },
+    {
+        "id": "69fec79b478ee484",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER2",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1420,
+        "wires": [
+            [
+                "e85807c978ec59b0"
+            ]
+        ]
+    },
+    {
+        "id": "13f0283ec71b6ef7",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1460,
+        "wires": [
+            [
+                "0650655988c80eda"
+            ]
+        ]
+    },
+    {
+        "id": "54e9ea7092ea6cfd",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER4",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1500,
+        "wires": [
+            [
+                "6e080a1c996ed6f6"
+            ]
+        ]
+    },
+    {
+        "id": "c40c36d3e47fb216",
+        "type": "mqtt in",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "topic": "stat/Box3A/RESULT",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 1440,
+        "wires": [
+            [
+                "c5df7cd0fea2d254",
+                "69fec79b478ee484",
+                "13f0283ec71b6ef7",
+                "54e9ea7092ea6cfd"
+            ]
+        ]
+    },
+    {
+        "id": "210fef14aa3d95ff",
+        "type": "mqtt in",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "topic": "tele/Box4/SENSOR",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 1840,
+        "wires": [
+            [
+                "327f912984b0fbd7",
+                "0813551ba20eb480",
+                "c6f1b97998175475"
+            ]
+        ]
+    },
+    {
+        "id": "327f912984b0fbd7",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.DS18B20.Temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1780,
+        "wires": [
+            [
+                "5e6c36ea697f62a7"
+            ]
+        ]
+    },
+    {
+        "id": "5e6c36ea697f62a7",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "b749d9fb8731a471",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "name": "Soil Temp",
+        "label": "Soil Temp",
+        "format": "{{value | number:1}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 700,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "0813551ba20eb480",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.HTU21.Temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1820,
+        "wires": [
+            [
+                "86d9172f37e99fa5",
+                "7d8dd753194bcbfc"
+            ]
+        ]
+    },
+    {
+        "id": "c6f1b97998175475",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.HTU21.Humidity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1900,
+        "wires": [
+            [
+                "fd497d33a053de43"
+            ]
+        ]
+    },
+    {
+        "id": "86d9172f37e99fa5",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "b749d9fb8731a471",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "AirTemp",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 700,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "fd497d33a053de43",
+        "type": "ui_text",
+        "z": "b1f137bc1cc172fb",
+        "group": "b749d9fb8731a471",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "Air Rh",
+        "label": "Air Rh",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 690,
+        "y": 1900,
+        "wires": []
+    },
+    {
+        "id": "7d8dd753194bcbfc",
+        "type": "ui_chart",
+        "z": "b1f137bc1cc172fb",
+        "name": "Air Temp",
+        "group": "b749d9fb8731a471",
+        "order": 1,
+        "width": "6",
+        "height": "4",
+        "label": "Air Temp",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "70",
+        "ymax": "90",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 700,
+        "y": 1860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2a2735c2ff19b8fc",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 5,
+        "group": "b749d9fb8731a471",
+        "width": "4",
+        "height": "1",
+        "label": "Light",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "f632d3b1157829a8",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 7,
+        "group": "b749d9fb8731a471",
+        "width": "4",
+        "height": "1",
+        "label": "Ex Fan",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 2080,
+        "wires": []
+    },
+    {
+        "id": "ca4f9242fe590eb6",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 9,
+        "group": "b749d9fb8731a471",
+        "width": "4",
+        "height": "1",
+        "label": "Circ Fan",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "d1b462848a6b4cd5",
+        "type": "ui_led",
+        "z": "b1f137bc1cc172fb",
+        "order": 11,
+        "group": "b749d9fb8731a471",
+        "width": "4",
+        "height": "1",
+        "label": "Spare",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "901d7f1497eb8e0c",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 2040,
+        "wires": [
+            [
+                "2a2735c2ff19b8fc"
+            ]
+        ]
+    },
+    {
+        "id": "ee3229d30d67b3ea",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER2",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 2080,
+        "wires": [
+            [
+                "f632d3b1157829a8"
+            ]
+        ]
+    },
+    {
+        "id": "9b35d13e97a25f36",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 2120,
+        "wires": [
+            [
+                "ca4f9242fe590eb6"
+            ]
+        ]
+    },
+    {
+        "id": "40d3751773f934af",
+        "type": "change",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.POWER4",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 2160,
+        "wires": [
+            [
+                "d1b462848a6b4cd5"
+            ]
+        ]
+    },
+    {
+        "id": "aab56408d5393db2",
+        "type": "mqtt in",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "topic": "stat/Box4/RESULT",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7750bcb.fd7ad44",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 2100,
+        "wires": [
+            [
+                "901d7f1497eb8e0c",
+                "ee3229d30d67b3ea",
+                "9b35d13e97a25f36",
+                "40d3751773f934af"
+            ]
+        ]
+    },
+    {
+        "id": "75ba70b47b711c99",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "b749d9fb8731a471",
+        "order": 6,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 2220,
+        "wires": [
+            [
+                "4362ef5e2151e448"
+            ]
+        ]
+    },
+    {
+        "id": "4362ef5e2151e448",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Light",
+        "topic": "cmnd/Box4/Power1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 530,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "236c7928e83f148a",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Ex Fan",
+        "topic": "cmnd/Box4/Power2",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 540,
+        "y": 2260,
+        "wires": []
+    },
+    {
+        "id": "1d279ea62d8adf0f",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Circ Fan",
+        "topic": "cmnd/Box4/Power3",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 540,
+        "y": 2300,
+        "wires": []
+    },
+    {
+        "id": "b720e34a5b600c24",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Spare",
+        "topic": "cmnd/Box4/Power4",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 530,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "fb18493d1529b6a2",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "b749d9fb8731a471",
+        "order": 8,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 2260,
+        "wires": [
+            [
+                "236c7928e83f148a"
+            ]
+        ]
+    },
+    {
+        "id": "d930889871fc76b0",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "b749d9fb8731a471",
+        "order": 10,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 2300,
+        "wires": [
+            [
+                "1d279ea62d8adf0f"
+            ]
+        ]
+    },
+    {
+        "id": "50f8978e78ef4646",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "b749d9fb8731a471",
+        "order": 12,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 2340,
+        "wires": [
+            [
+                "b720e34a5b600c24"
+            ]
+        ]
+    },
+    {
+        "id": "c286625789a1e06f",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "9599a10ac3c34a6e",
+        "order": 6,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 1560,
+        "wires": [
+            [
+                "f7d25a11f5cf98b0"
+            ]
+        ]
+    },
+    {
+        "id": "f7d25a11f5cf98b0",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Light",
+        "topic": "cmnd/Box3A/Power1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 530,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "a1f2564a3e709f02",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Ex Fan",
+        "topic": "cmnd/Box3A/Power2",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 540,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "c6a4cabd9f86f7f6",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Circ Fan",
+        "topic": "cmnd/Box3A/Power3",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 540,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "2fd68e869d7cb5d6",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Spare",
+        "topic": "cmnd/Box3A/Power4",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 530,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "e321d9666ea30f49",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "9599a10ac3c34a6e",
+        "order": 8,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 1600,
+        "wires": [
+            [
+                "a1f2564a3e709f02"
+            ]
+        ]
+    },
+    {
+        "id": "b7035cba24260a3d",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "9599a10ac3c34a6e",
+        "order": 10,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 1640,
+        "wires": [
+            [
+                "c6a4cabd9f86f7f6"
+            ]
+        ]
+    },
+    {
+        "id": "58bdc0dee8e61214",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "9599a10ac3c34a6e",
+        "order": 12,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 1680,
+        "wires": [
+            [
+                "2fd68e869d7cb5d6"
+            ]
+        ]
+    },
+    {
+        "id": "f71273489aa4c713",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "1ddd0099426c5847",
+        "order": 6,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 980,
+        "wires": [
+            [
+                "5e3565e6ac579e1e"
+            ]
+        ]
+    },
+    {
+        "id": "5e3565e6ac579e1e",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Light",
+        "topic": "cmnd/Box2/Power1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 530,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "3d9892ab58f8d445",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Ex Fan",
+        "topic": "cmnd/Box2/Power2",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 540,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "80565c8d33c2b83c",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Circ Fan",
+        "topic": "cmnd/Box2/Power3",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 540,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "68181730aa161e56",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Spare",
+        "topic": "cmnd/Box2/Power4",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 530,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "3c5c2f4bef51c91a",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "1ddd0099426c5847",
+        "order": 8,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 1020,
+        "wires": [
+            [
+                "3d9892ab58f8d445"
+            ]
+        ]
+    },
+    {
+        "id": "2b3964655b0231a4",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "1ddd0099426c5847",
+        "order": 10,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 1060,
+        "wires": [
+            [
+                "80565c8d33c2b83c"
+            ]
+        ]
+    },
+    {
+        "id": "b4795feffe56ec21",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "1ddd0099426c5847",
+        "order": 12,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 1100,
+        "wires": [
+            [
+                "68181730aa161e56"
+            ]
+        ]
+    },
+    {
+        "id": "a3a3fc6304ef231b",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "170680becd8f6f25",
+        "order": 6,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 400,
+        "wires": [
+            [
+                "f446d76f41a0143a"
+            ]
+        ]
+    },
+    {
+        "id": "f446d76f41a0143a",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Light",
+        "topic": "cmnd/Box1/Power1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 530,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "2d79b2969707a7d7",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Ex Fan",
+        "topic": "cmnd/Box1/Power2",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 540,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "949a29e4acd028e2",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Circ Fan",
+        "topic": "cmnd/Box1/Power3",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 540,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "f0ac994b9777b558",
+        "type": "mqtt out",
+        "z": "b1f137bc1cc172fb",
+        "name": "Spare",
+        "topic": "cmnd/Box1/Power4",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7750bcb.fd7ad44",
+        "x": 530,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "5ca76f07a2d82e59",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "170680becd8f6f25",
+        "order": 8,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 440,
+        "wires": [
+            [
+                "2d79b2969707a7d7"
+            ]
+        ]
+    },
+    {
+        "id": "3b5b7f3921d44bdc",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "170680becd8f6f25",
+        "order": 10,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 480,
+        "wires": [
+            [
+                "949a29e4acd028e2"
+            ]
+        ]
+    },
+    {
+        "id": "0d9abe4ce618f48a",
+        "type": "ui_button",
+        "z": "b1f137bc1cc172fb",
+        "name": "",
+        "group": "170680becd8f6f25",
+        "order": 12,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 350,
+        "y": 520,
+        "wires": [
+            [
+                "f0ac994b9777b558"
+            ]
+        ]
+    },
+    {
+        "id": "a3161c921cc41a94",
+        "type": "comment",
+        "z": "b1f137bc1cc172fb",
+        "name": "Box1 Control",
+        "info": "Monitor and control Box1.\nAdded air and soil monitors 09/23.\nAdded relay toggle buttons  10/23.",
+        "x": 90,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "cbdf54581f9cbe66",
+        "type": "comment",
+        "z": "b1f137bc1cc172fb",
+        "name": "Box2 Control",
+        "info": "Monitor and control Box2.\nAdded air and soil monitors 09/23.\nAdded relay toggle buttons  10/23.",
+        "x": 90,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "23ff47c1f0f71426",
+        "type": "comment",
+        "z": "b1f137bc1cc172fb",
+        "name": "Box3Control",
+        "info": "Monitor and control Box3.\nAdded air and soil monitors 09/23.\nAdded relay toggle buttons  10/23.",
+        "x": 90,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "12c7c643d4256078",
+        "type": "comment",
+        "z": "b1f137bc1cc172fb",
+        "name": "Box4 Control",
+        "info": "Monitor and control Box4.\nAdded air and soil monitors 09/23.\nAdded relay toggle buttons  10/23. ",
+        "x": 90,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "7750bcb.fd7ad44",
+        "type": "mqtt-broker",
+        "name": "mqtt_pi",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "1ddd0099426c5847",
+        "type": "ui_group",
+        "name": "Box2",
+        "tab": "5191457647eb2156",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "170680becd8f6f25",
+        "type": "ui_group",
+        "name": "Box1",
+        "tab": "5191457647eb2156",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9599a10ac3c34a6e",
+        "type": "ui_group",
+        "name": "Box3",
+        "tab": "5191457647eb2156",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b749d9fb8731a471",
+        "type": "ui_group",
+        "name": "Box4",
+        "tab": "5191457647eb2156",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5191457647eb2156",
+        "type": "ui_tab",
+        "name": "Outhouse",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
